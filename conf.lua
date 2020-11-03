@@ -6,7 +6,7 @@ function love.conf(t)
     t.window.vsync = true
     t.window.fullscreen = false
     t.window.msaa = 1
-    t.window.title = "BKs Super Moonshot Adventure"
+    t.window.title = "Super Moonshot Adventure"
 
     t.console = true
 
