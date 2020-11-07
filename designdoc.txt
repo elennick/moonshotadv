@@ -1,0 +1,27 @@
+game entites:
+
+player
+* player character that attempts to get from the beginning of the level to the moon at the end
+
+obstacles (block movement or affect movement but dont kill)
+* planets and planetoids that the player can jump between
+** some may be static but some are not static and move/orbit/rotate
+* walls or other barriers
+
+dangers
+* turrets firing seeking missiles
+* turrets firing bullets
+* static barriers (doesnt kill but blocks movement)
+* laser barriers that turn off and on (do kill)
+
+
+
+
+game systems required:
+* physics system where planetoids and other components have gravity and can collide
+* level defining and loading system so there can be many levels with different paths to the goal
+* components that can be laid out level both as obstacles and dangers
+
+game screens required:
+* title screen - can be simple and just have a title and describe controls
+* gameplay screen - loads levels and lets the player play them

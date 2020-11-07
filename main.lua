@@ -37,6 +37,13 @@ function love.load()
     planet4Image = love.graphics.newImage("image/planets/Terran.png")
     planet4 = RotatingPlanet:new(850, 600, 5, planet4Image, -.05, 'Planet4')
     table.insert(planets, planet4)
+
+    planet5Image = love.graphics.newImage("image/planets/CO-MechPlanet.png")
+    planet5 = RotatingPlanet:new(200, 300, 4, planet5Image, -.05, 'Planet5')
+    table.insert(planets, planet5)
+
+    --turretImage = love.graphics.newImage("image/planets/ship_1.png")
+    --turret =
 end
 
 function love.draw()

@@ -1,10 +1,10 @@
 local class = require 'libs.middleclass'
+local Entity = require 'src.entity'
 
-RotatingPlanet = class('RotatingPlanet')
+RotatingPlanet = class('RotatingPlanet', Entity)
 
 function RotatingPlanet:initialize(x, y, size, image, rotationSpeed, collisionClass)
-    self.x = x
-    self.y = y
+    Entity.initialize(self, x, y)
     self.size = size
     self.image = image
     self.rotationSpeed = rotationSpeed
@@ -35,18 +35,6 @@ end
 
 function RotatingPlanet:getCollisionClass()
     return self.collisionClass
-end
-
-function RotatingPlanet:getX()
-    return self.x
-end
-
-function RotatingPlanet:getY()
-    return self.y
-end
-
-function RotatingPlanet:getCoords()
-    return self.x, self.y
 end
 
 function RotatingPlanet:getBox()

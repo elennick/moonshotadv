@@ -1,12 +1,12 @@
 local anim8 = require 'libs.anim8'
 local class = require 'libs.middleclass'
 local wf = require 'libs.windfield'
+local Entity = require 'src.entity'
 
-Player = class('Player')
+Player = class('Player', Entity)
 
 function Player:initialize(x, y, rotation)
-    self.x = x
-    self.y = y
+    Entity.initialize(self, x, y)
     self.w = 32
     self.h = 32
     self.rotation = rotation
@@ -48,18 +48,6 @@ end
 
 function Player:applyLinearImpulse(x, y)
     self.collider:applyLinearImpulse(x, y)
-end
-
-function Player:getX()
-    return self.x
-end
-
-function Player:getY()
-    return self.y
-end
-
-function Player:getCoords()
-    return self.x, self.y
 end
 
 function Player:getBox()
