@@ -1,5 +1,6 @@
 local anim8 = require 'libs.anim8'
 local class = require 'libs.middleclass'
+local wf = require 'libs.windfield'
 
 Player = class('Player')
 
@@ -16,6 +17,12 @@ function Player:initialize(x, y)
     playerWalkSpriteSheet = love.graphics.newImage("image/characters/elise_walk.png")
     playerWalkFrames = anim8.newGrid(32, 32, playerWalkSpriteSheet:getWidth(), playerWalkSpriteSheet:getHeight())
     playerWalkAnimation = anim8.newAnimation(playerWalkFrames('1-3', 1), 0.15)
+
+    world:addCollisionClass('Player')
+    self.collider = world:newBSGRectangleCollider(x, y, 32, 32, 8)
+    --self.collider = world:newRectangleCollider(x, y, 32, 32)
+    --self.collider = world:newCircleCollider(x, y, 20)
+    self.collider:setCollisionClass('Player')
 end
 
 function Player:draw()
@@ -31,13 +38,28 @@ function Player:update(dt)
     playerIdleAnimation:update(dt)
     playerWalkAnimation:update(dt)
 
-    isMoving = false
-    if love.keyboard.isDown("right") then
-        isMoving = true
-    end
-    if love.keyboard.isDown("left") then
-        isMoving = true
-    end
+    self.x = self.collider:getX() + 4
+    self.y = self.collider:getY()
+end
+
+function Player:applyLinearImpulse(x, y)
+    self.collider:applyLinearImpulse(x, y)
+end
+
+function Player:getX()
+    return self.x
+end
+
+function Player:getY()
+    return self.y
+end
+
+function Player:getCoords()
+    return self.x, self.y
+end
+
+function Player:getBox()
+    return self.collider
 end
 
 return Player

@@ -11,6 +11,6 @@ function love.conf(t)
     t.console = true
 
     t.modules.joystick = false
-    t.modules.physics = false
+    t.modules.physics = true
     t.modules.mouse = false
 end
