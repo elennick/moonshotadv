@@ -9,7 +9,7 @@ function RotatingPlanet:initialize(x, y, size, image, rotationSpeed, collisionCl
     self.image = image
     self.rotationSpeed = rotationSpeed
     self.collisionClass = collisionClass
-    self.rotation = 0
+    self.rotation = love.math.random(359)
 
     world:addCollisionClass(collisionClass)
     self.collider = world:newCircleCollider(self.x, self.y, size * 24)
@@ -27,13 +27,10 @@ function RotatingPlanet:draw()
 end
 
 function RotatingPlanet:update(dt)
-    self.rotation = self.rotation + self.rotationSpeed
+    self.rotation = self.rotation + (self.rotationSpeed * dt)
     if self.rotation > 360 then
         self.rotation = 0
     end
-    --print('angle ' .. self.collider:getAngle())
-    --self.collider:setAngle(self.collider:getAngle() + 1)
-    --self.collider:applyAngularImpulse(100)
 end
 
 function RotatingPlanet:getCollisionClass()
