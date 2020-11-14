@@ -3,19 +3,17 @@ local Entity = require 'src.entity'
 
 RotatingPlanet = class('RotatingPlanet', Entity)
 
-function RotatingPlanet:initialize(x, y, size, image, rotationSpeed, collisionClass)
-    Entity.initialize(self, x, y)
-    self.size = size
-    self.image = image
-    self.rotationSpeed = rotationSpeed
-    self.collisionClass = collisionClass
+function RotatingPlanet:initialize(args)
+    Entity.initialize(self, args.x, args.y)
+    self.size = args.size
+    self.image = args.image
+    self.rotationSpeed = args.rotationSpeed
     self.rotation = love.math.random(359)
 
-    world:addCollisionClass(collisionClass)
-    self.collider = world:newCircleCollider(self.x, self.y, size * 24)
+    self.collider = world:newCircleCollider(self.x, self.y, self.size * 24)
     self.collider:setType('static')
     self.collider:setFriction(0.25)
-    self.collider:setCollisionClass(collisionClass)
+    self.collider:setCollisionClass('Planet')
 end
 
 function RotatingPlanet:draw()
@@ -31,10 +29,6 @@ function RotatingPlanet:update(dt)
     if self.rotation > 360 then
         self.rotation = 0
     end
-end
-
-function RotatingPlanet:getCollisionClass()
-    return self.collisionClass
 end
 
 function RotatingPlanet:getBox()

@@ -4,12 +4,16 @@ local wf = require 'libs.windfield'
 
 require 'src.player'
 require 'src.rotatingplanet'
+require 'src.turret'
 require 'src.background'
+require 'src.bullet'
 
-local entities = {}
+local turrets = {}
 local planets = {}
 local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
+local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
+bullets = {}
 
 function love.load()
     math.randomseed(os.time())
@@ -19,49 +23,43 @@ function love.load()
     world = wf.newWorld(0, 0, true)
     world:setGravity(0, 0)
 
+    world:addCollisionClass('Planet')
+    world:addCollisionClass('Bullet')
+    world:addCollisionClass('Player')
+
     background = Background:new()
     player = Player:new(700, 0, 0)
 
-    planet1Image = love.graphics.newImage("image/planets/Baren.png")
-    planet1 = RotatingPlanet:new(700, 300, 4, planet1Image, .1, 'Planet1')
-    table.insert(planets, planet1)
+    table.insert(planets, RotatingPlanet:new({ x = 700, y = 375, size = 4, image = love.graphics.newImage("image/planets/Baren.png"), rotationSpeed = .1 }))
+    table.insert(planets, RotatingPlanet:new({ x = 550, y = 600, size = 3, image = love.graphics.newImage("image/planets/Ice.png"), rotationSpeed = .2 }))
+    table.insert(planets, RotatingPlanet:new({ x = 300, y = 425, size = 4, image = love.graphics.newImage("image/planets/Lava.png"), rotationSpeed = -.1 }))
+    table.insert(planets, RotatingPlanet:new({ x = 450, y = 200, size = 3, image = love.graphics.newImage("image/planets/Terran.png"), rotationSpeed = -.15 }))
+    table.insert(planets, RotatingPlanet:new({ x = 850, y = 150, size = 4, image = love.graphics.newImage("image/planets/CO-MechPlanet.png"), rotationSpeed = .15 }))
 
-    planet2Image = love.graphics.newImage("image/planets/Ice.png")
-    planet2 = RotatingPlanet:new(400, 400, 3, planet2Image, .2, 'Planet2')
-    table.insert(planets, planet2)
-
-    planet3Image = love.graphics.newImage("image/planets/Lava.png")
-    planet3 = RotatingPlanet:new(950, 200, 4, planet3Image, -.2, 'Planet3')
-    table.insert(planets, planet3)
-
-    planet4Image = love.graphics.newImage("image/planets/Terran.png")
-    planet4 = RotatingPlanet:new(850, 600, 5, planet4Image, -.05, 'Planet4')
-    table.insert(planets, planet4)
-
-    planet5Image = love.graphics.newImage("image/planets/CO-MechPlanet.png")
-    planet5 = RotatingPlanet:new(200, 300, 4, planet5Image, -.05, 'Planet5')
-    table.insert(planets, planet5)
-
-    --turretImage = love.graphics.newImage("image/planets/ship_1.png")
-    --turret =
+    table.insert(turrets, Turret:new({ x = 50, y = 50, firingSpeed = 2, bulletSpeed = 5 }))
+    table.insert(turrets, Turret:new({ x = 1200, y = 650, firingSpeed = 3, bulletSpeed = 8 }))
 end
 
 function love.draw()
     background:draw()
-    for i in ipairs(entities) do
+    for i in ipairs(turrets) do
         love.graphics.setColor(1, 1, 1, 1)
-        entities[i]:draw()
+        turrets[i]:draw()
     end
     for i in ipairs(planets) do
         love.graphics.setColor(1, 1, 1, 1)
         planets[i]:draw()
     end
+    for i in ipairs(bullets) do
+        love.graphics.setColor(1, 1, 1, 1)
+        bullets[i]:draw()
+    end
     player:draw()
-
     --world:draw()
 end
 
 function love.update(dt)
+    --figure out what the closest planet is
     if table.getn(planets) > 0 then
         closestPlanet = planets[1]
         for i in ipairs(planets) do
@@ -76,13 +74,15 @@ function love.update(dt)
     vectorXTowardClosestPlanet = closestPlanet:getX() - player:getX();
     vectorYTowardClosestPlanet = closestPlanet:getY() - player:getY();
 
-    if not player:getBox():enter(closestPlanet:getCollisionClass()) then
+    --apply gravity towards the closest planet
+    if not player:getBox():enter('Planet') then
         player:applyLinearImpulse(vectorXTowardClosestPlanet, vectorYTowardClosestPlanet)
     else
         player:getBox():setLinearVelocity(0, 0)
         player:getBox():setAngularVelocity(0)
     end
 
+    --handle input
     if love.keyboard.isDown("escape") then
         love.event.quit()
     end
@@ -107,18 +107,33 @@ function love.update(dt)
         player:getBox():applyLinearImpulse(-vectorYTowardClosestPlanet / 2, vectorXTowardClosestPlanet / 2)
     end
 
-    --local xvel, yvel = player:getBox():getLinearVelocity()
-    --player:getBox():setLinearVelocity(math.min(xvel, 20), math.min(yvel, 20))
-
+    --update all entities in the world
     world:update(dt)
     background:update(dt)
-    for i in ipairs(entities) do
-        entities[i]:update(dt)
+
+    for i in ipairs(turrets) do
+        turrets[i]:update(dt)
     end
+
     for i in ipairs(planets) do
         planets[i]:update(dt)
     end
 
+    for i in ipairs(bullets) do
+        bullets[i]:update(dt)
+        if bullets[i]:getBox():enter('Planet') then
+            print 'collision'
+            bullets[i]:destroy(i)
+            break
+        end
+        if bullets[i]:getTimeAlive() > bulletLifetime then
+            print 'bullet deleted'
+            bullets[i]:destroy(i)
+            break
+        end
+    end
+
+    --angle the player feet-down towards the closest planet
     local angleTo = math.atan2(vectorYTowardClosestPlanet, vectorXTowardClosestPlanet)
     player:update(dt, angleTo)
 end

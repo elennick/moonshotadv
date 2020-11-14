@@ -19,7 +19,6 @@ function Player:initialize(x, y, rotation)
     playerWalkFrames = anim8.newGrid(32, 32, playerWalkSpriteSheet:getWidth(), playerWalkSpriteSheet:getHeight())
     playerWalkAnimation = anim8.newAnimation(playerWalkFrames('1-3', 1), 0.15)
 
-    world:addCollisionClass('Player')
     self.collider = world:newBSGRectangleCollider(x, y, 32, 32, 8)
     self.collider:setCollisionClass('Player')
 end
@@ -43,7 +42,7 @@ function Player:update(dt, playerRotationInRadians)
     self.y = self.collider:getY()
 
     self.rotation = playerRotationInRadians - 1.65
-    print('rotation in radians ' .. self.rotation)
+    --print('rotation in radians ' .. self.rotation)
 end
 
 function Player:applyLinearImpulse(x, y)
