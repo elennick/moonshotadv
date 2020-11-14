@@ -13,6 +13,7 @@ function Bullet:initialize(x, y)
 
     self.collider = world:newCircleCollider(x, y, 3)
     self.collider:setCollisionClass('Bullet')
+    self.collider:setRestitution(1)
 end
 
 function Bullet:draw()

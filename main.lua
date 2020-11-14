@@ -7,12 +7,15 @@ require 'src.rotatingplanet'
 require 'src.turret'
 require 'src.background'
 require 'src.bullet'
+require 'src.wall'
 
-local turrets = {}
-local planets = {}
 local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
+
+local turrets = {}
+local planets = {}
+local walls = {}
 bullets = {}
 
 function love.load()
@@ -20,12 +23,17 @@ function love.load()
     local major, minor, revision, codename = love.getVersion()
     print("running with LÖVE version: " .. major .. "." .. minor .. "." .. revision .. " " .. codename)
 
+    local music = love.audio.newSource("audio/music/manystars.ogg", 'static')
+    music:setLooping(true)
+    music:play()
+
     world = wf.newWorld(0, 0, true)
     world:setGravity(0, 0)
 
     world:addCollisionClass('Planet')
     world:addCollisionClass('Bullet')
     world:addCollisionClass('Player')
+    world:addCollisionClass('Wall')
 
     background = Background:new()
     player = Player:new(700, 0, 0)
@@ -38,6 +46,11 @@ function love.load()
 
     table.insert(turrets, Turret:new({ x = 50, y = 50, firingSpeed = 2, bulletSpeed = 5 }))
     table.insert(turrets, Turret:new({ x = 1200, y = 650, firingSpeed = 3, bulletSpeed = 8 }))
+
+    table.insert(walls, Wall:new({ x = 150, y = 100, w = 20, h = 100 }))
+    table.insert(walls, Wall:new({ x = 1000, y = 600, w = 10, h = 150 }))
+    table.insert(walls, Wall:new({ x = 700, y = 100, w = 10, h = 75 }))
+    table.insert(walls, Wall:new({ x = 425, y = 350, w = 100, h = 5 }))
 end
 
 function love.draw()
@@ -53,6 +66,10 @@ function love.draw()
     for i in ipairs(bullets) do
         love.graphics.setColor(1, 1, 1, 1)
         bullets[i]:draw()
+    end
+    for i in ipairs(walls) do
+        love.graphics.setColor(1, 1, 1, 1)
+        walls[i]:draw()
     end
     player:draw()
     --world:draw()
@@ -84,7 +101,7 @@ function love.update(dt)
 
     --handle input
     if love.keyboard.isDown("escape") then
-        love.event.quit()
+        love.event.quit() --remove this before finalizing, create a real menu with an exit option
     end
 
     lastJumped = lastJumped + dt
@@ -117,6 +134,10 @@ function love.update(dt)
 
     for i in ipairs(planets) do
         planets[i]:update(dt)
+    end
+
+    for i in ipairs(walls) do
+        walls[i]:update(dt)
     end
 
     for i in ipairs(bullets) do
