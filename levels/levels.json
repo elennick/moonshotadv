@@ -417,6 +417,105 @@
         }
     },
     {
+        "name": "Bombardment",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 100,
+                    "y": 450
+                }
+            },
+            "planets": [
+                {
+                    "type": "earth",
+                    "size": 3,
+                    "position": {
+                        "x": 200,
+                        "y": 450
+                    }
+                },
+                {
+                    "type": "mech",
+                    "size": 3,
+                    "position": {
+                        "x": 450,
+                        "y": 400
+                    }
+                },
+                {
+                    "type": "mech",
+                    "size": 3,
+                    "position": {
+                        "x": 700,
+                        "y": 500
+                    }
+                },
+                {
+                    "type": "mech",
+                    "size": 3,
+                    "position": {
+                        "x": 900,
+                        "y": 375
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 3,
+                    "position": {
+                        "x": 1025,
+                        "y": 575
+                    }
+                }
+            ],
+            "turrets": [
+                {
+                    "type": "missile",
+                    "firingSpeed": 2.75,
+                    "projectileSpeed": 5,
+                    "startAngle": 1.5,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 50,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 1.95,
+                    "projectileSpeed": 2,
+                    "startAngle": 1.5,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 250,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 2.1,
+                    "projectileSpeed": 2,
+                    "startAngle": 4.5,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 975,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 2.5,
+                    "projectileSpeed": 5,
+                    "startAngle": 4.5,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 1175,
+                        "y": 100
+                    }
+                }
+            ]
+        }
+    },
+    {
         "name": "Sandbox",
         "entities": {
             "player": {

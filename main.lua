@@ -12,10 +12,10 @@ require 'src.wall'
 local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
-local missileLifetime = 15
+local missileLifetime = 20
 
 local currentLevelName = nil
-local currentLevel = 6
+local currentLevel = 1
 local levels = nil
 local turrets = {}
 local planets = {}
@@ -106,7 +106,7 @@ function love.update(dt)
         end
     end
 
-    if player:getBox():enter('Bullet') then
+    if player:getBox():enter('Bullet') or player:getBox():enter('Missile') then
         restartLevel()
     end
 

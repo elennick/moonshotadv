@@ -46,7 +46,7 @@ end
 
 function Turret:fireMissile()
     local velx, vely = self:getVelocityOfNextProjectile()
-    local missile = Missile:new(self.x - velx * 20, self.y - vely * 20)
+    local missile = Missile:new(self.x - velx * 20, self.y - vely * 20, self.projectileSpeed)
     missile:getBox():applyLinearImpulse(-velx * self.projectileSpeed, -vely * self.projectileSpeed)
     return missile
 end

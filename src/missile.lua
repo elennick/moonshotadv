@@ -4,10 +4,12 @@ local Entity = require 'src.entity'
 
 Missile = class('Missile', Entity)
 
-function Missile:initialize(x, y)
+function Missile:initialize(x, y, projectileSpeed)
     Entity.initialize(self, x, y)
     self.timeAlive = 0
     self.timeSinceLastImpulse = 0
+    self.rotation = self:getRadiansTowardPlayer() - 1.58
+    self.projectileSpeed = projectileSpeed
 
     self.image = love.graphics.newImage("image/rocket.png")
 
@@ -33,10 +35,20 @@ function Missile:update(dt)
     self.x = self.collider:getX()
     self.y = self.collider:getY()
 
-    if self.timeSinceLastImpulse > .5 then
-        velx, vely = self:getVectorTowardPlayer()
-        self:getBox():applyLinearImpulse(-velx / 75, -vely / 75)
+    if self.timeSinceLastImpulse > .1 then
         self.timeSinceLastImpulse = 0
+        local velx, vely = self:getVectorTowardPlayer()
+
+        --move towards player
+        local length = math.sqrt(velx * velx + vely * vely);
+        if length ~= 0 then
+            velx = velx / length;
+            vely = vely / length;
+        end
+        self:getBox():applyLinearImpulse(-velx * self.projectileSpeed, -vely * self.projectileSpeed)
+
+        --point towards player
+        self.rotation = self:getRadiansTowardPlayer() - 1.58
     end
 end
 
