@@ -31,24 +31,22 @@ function Turret:update(dt)
 end
 
 function Turret:fire()
+    local velx, vely
     if self.shouldTrackPlayer then
-        local velx, vely = self:getVectorTowardPlayer()
+        velx, vely = self:getVectorTowardPlayer()
         local length = math.sqrt(velx * velx + vely * vely);
         if length ~= 0 then
             velx = velx / length;
             vely = vely / length;
         end
-
-        local bullet = Bullet:new(self.x - velx * 20, self.y - vely * 20)
-        bullet:getBox():applyLinearImpulse(-velx * self.bulletSpeed, -vely * self.bulletSpeed)
-        return bullet
     else
-        local velx = math.cos(self.rotation + 1.58)
-        local vely = math.sin(self.rotation + 1.58)
-        local bullet = Bullet:new(self.x - velx * 20, self.y - vely * 20)
-        bullet:getBox():applyLinearImpulse(-velx * self.bulletSpeed, -vely * self.bulletSpeed)
-        return bullet
+        velx = math.cos(self.rotation + 1.58)
+        vely = math.sin(self.rotation + 1.58)
     end
+
+    local bullet = Bullet:new(self.x - velx * 20, self.y - vely * 20)
+    bullet:getBox():applyLinearImpulse(-velx * self.bulletSpeed, -vely * self.bulletSpeed)
+    return bullet 
 end
 
 function Turret:getRadiansTowardPlayer()
