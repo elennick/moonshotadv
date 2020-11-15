@@ -208,7 +208,7 @@
         }
     },
     {
-        "name": "Level 2",
+        "name": "Sandbox",
         "entities": {
             "player": {
                 "startPosition": {
@@ -274,8 +274,8 @@
                     "type": "bullet",
                     "firingSpeed": 1,
                     "projectileSpeed": 10,
-                    "startAngle": 1.5,
-                    "tracksPlayer": true,
+                    "startAngle": -1,
+                    "tracksPlayer": false,
                     "position": {
                         "x": 1200,
                         "y": 650

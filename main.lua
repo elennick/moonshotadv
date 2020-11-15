@@ -15,7 +15,7 @@ local jumpLimit = 0.5 --how often can the player jump... lower numbers are faste
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 
 local currentLevelName = nil
-local currentLevel = 1
+local currentLevel = 5
 local levels
 local turrets = {}
 local planets = {}
@@ -222,8 +222,10 @@ function loadLevel(level)
         for i in ipairs(turretsToLoad) do
             table.insert(turrets, Turret:new({ x = turretsToLoad[i].position.x,
                                                y = turretsToLoad[i].position.y,
+                                               startAngle = turretsToLoad[i].startAngle,
                                                firingSpeed = turretsToLoad[i].firingSpeed,
-                                               bulletSpeed = turretsToLoad[i].projectileSpeed }))
+                                               bulletSpeed = turretsToLoad[i].projectileSpeed,
+                                               shouldTrackPlayer = turretsToLoad[i].tracksPlayer }))
         end
     end
 
