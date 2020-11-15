@@ -46,7 +46,7 @@ function Turret:fire()
 
     local bullet = Bullet:new(self.x - velx * 20, self.y - vely * 20)
     bullet:getBox():applyLinearImpulse(-velx * self.bulletSpeed, -vely * self.bulletSpeed)
-    return bullet 
+    return bullet
 end
 
 function Turret:getRadiansTowardPlayer()
