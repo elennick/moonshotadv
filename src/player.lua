@@ -5,11 +5,11 @@ local Entity = require 'src.entity'
 
 Player = class('Player', Entity)
 
-function Player:initialize(x, y, rotation)
+function Player:initialize(x, y)
     Entity.initialize(self, x, y)
     self.w = 32
     self.h = 32
-    self.rotation = rotation
+    self.rotation = 0
 
     playerIdleSpriteSheet = love.graphics.newImage("image/characters/elise_idle.png")
     playerIdleFrames = anim8.newGrid(32, 32, playerIdleSpriteSheet:getWidth(), playerIdleSpriteSheet:getHeight())

@@ -1,0 +1,126 @@
+[
+    {
+        "name": "Level 1",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 1000,
+                    "y": 25
+                }
+            },
+            "planets": [
+                {
+                    "type": "lava",
+                    "size": 4,
+                    "rotationSpeed": ".1",
+                    "position": {
+                        "x": 700,
+                        "y": 375
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 3,
+                    "rotationSpeed": ".2",
+                    "position": {
+                        "x": 550,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 4,
+                    "rotationSpeed": "-.2",
+                    "position": {
+                        "x": 300,
+                        "y": 425
+                    }
+                },
+                {
+                    "type": "earth",
+                    "size": 3,
+                    "rotationSpeed": "-.15",
+                    "position": {
+                        "x": 450,
+                        "y": 200
+                    }
+                },
+                {
+                    "type": "mech",
+                    "size": 4,
+                    "rotationSpeed": ".15",
+                    "position": {
+                        "x": 850,
+                        "y": 150
+                    }
+                }
+            ],
+            "turrets": [
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2,
+                    "projectileSpeed": 5,
+                    "startAngle": 1.5,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 50,
+                        "y": 50
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 1,
+                    "projectileSpeed": 10,
+                    "startAngle": 1.5,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 1200,
+                        "y": 650
+                    }
+                }
+            ],
+            "walls": [
+                {
+                    "position": {
+                        "x": 150,
+                        "y": 100
+                    },
+                    "size": {
+                        "w": 20,
+                        "h": 100
+                    }
+                },
+                {
+                    "position": {
+                        "x": 1000,
+                        "y": 600
+                    },
+                    "size": {
+                        "w": 10,
+                        "h": 150
+                    }
+                },
+                {
+                    "position": {
+                        "x": 700,
+                        "y": 100
+                    },
+                    "size": {
+                        "w": 10,
+                        "h": 75
+                    }
+                },
+                {
+                    "position": {
+                        "x": 425,
+                        "y": 350
+                    },
+                    "size": {
+                        "w": 100,
+                        "h": 5
+                    }
+                }
+            ]
+        }
+    }
+]

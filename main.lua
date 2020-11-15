@@ -1,6 +1,7 @@
 local anim8 = require 'libs.anim8'
 local class = require 'libs.middleclass'
 local wf = require 'libs.windfield'
+local json = require 'libs.json'
 
 require 'src.player'
 require 'src.rotatingplanet'
@@ -13,6 +14,7 @@ local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 
+local levels
 local turrets = {}
 local planets = {}
 local walls = {}
@@ -23,34 +25,23 @@ function love.load()
     local major, minor, revision, codename = love.getVersion()
     print("running with LÖVE version: " .. major .. "." .. minor .. "." .. revision .. " " .. codename)
 
-    local music = love.audio.newSource("audio/music/manystars.ogg", 'static')
-    music:setLooping(true)
-    music:play()
+    local levelsJson = readFile("./levels/levels.json")
+    levels = json.decode(levelsJson)
 
     world = wf.newWorld(0, 0, true)
     world:setGravity(0, 0)
 
     world:addCollisionClass('Planet')
-    world:addCollisionClass('Bullet')
+    world:addCollisionClass('Bullet', { ignores = { 'Bullet' } })
     world:addCollisionClass('Player')
     world:addCollisionClass('Wall')
 
     background = Background:new()
-    player = Player:new(700, 0, 0)
+    loadLevel(1)
 
-    table.insert(planets, RotatingPlanet:new({ x = 700, y = 375, size = 4, image = love.graphics.newImage("image/planets/Baren.png"), rotationSpeed = .1 }))
-    table.insert(planets, RotatingPlanet:new({ x = 550, y = 600, size = 3, image = love.graphics.newImage("image/planets/Ice.png"), rotationSpeed = .2 }))
-    table.insert(planets, RotatingPlanet:new({ x = 300, y = 425, size = 4, image = love.graphics.newImage("image/planets/Lava.png"), rotationSpeed = -.1 }))
-    table.insert(planets, RotatingPlanet:new({ x = 450, y = 200, size = 3, image = love.graphics.newImage("image/planets/Terran.png"), rotationSpeed = -.15 }))
-    table.insert(planets, RotatingPlanet:new({ x = 850, y = 150, size = 4, image = love.graphics.newImage("image/planets/CO-MechPlanet.png"), rotationSpeed = .15 }))
-
-    table.insert(turrets, Turret:new({ x = 50, y = 50, firingSpeed = 2, bulletSpeed = 5 }))
-    table.insert(turrets, Turret:new({ x = 1200, y = 650, firingSpeed = 3, bulletSpeed = 8 }))
-
-    table.insert(walls, Wall:new({ x = 150, y = 100, w = 20, h = 100 }))
-    table.insert(walls, Wall:new({ x = 1000, y = 600, w = 10, h = 150 }))
-    table.insert(walls, Wall:new({ x = 700, y = 100, w = 10, h = 75 }))
-    table.insert(walls, Wall:new({ x = 425, y = 350, w = 100, h = 5 }))
+    local music = love.audio.newSource("audio/music/manystars.ogg", 'static')
+    music:setLooping(true)
+    music:play()
 end
 
 function love.draw()
@@ -165,4 +156,56 @@ end
 
 function distanceFrom(x1, y1, x2, y2)
     return math.sqrt((x2 - x1) ^ 2 + (y2 - y1) ^ 2)
+end
+
+function readFile(file)
+    local f = assert(io.open(file, "rb"))
+    local content = f:read("*all")
+    f:close()
+    return content
+end
+
+function loadLevel(level)
+    local levelToLoad = levels[level]
+
+    local playerToLoad = levelToLoad.entities.player
+    player = Player:new(playerToLoad.startPosition.x, playerToLoad.startPosition.y)
+
+    local planetsToLoad = levelToLoad.entities.planets
+    for i in ipairs(planetsToLoad) do
+        local img
+        if planetsToLoad[i].type == 'lava' then
+            img = love.graphics.newImage("image/planets/Lava.png")
+        elseif planetsToLoad[i].type == 'moon' then
+            img = love.graphics.newImage("image/planets/Baren.png")
+        elseif planetsToLoad[i].type == 'ice' then
+            img = love.graphics.newImage("image/planets/Ice.png")
+        elseif planetsToLoad[i].type == 'earth' then
+            img = love.graphics.newImage("image/planets/Terran.png")
+        elseif planetsToLoad[i].type == 'mech' then
+            img = love.graphics.newImage("image/planets/CO-MechPlanet.png")
+        end
+
+        table.insert(planets, RotatingPlanet:new({ x = planetsToLoad[i].position.x,
+                                                   y = planetsToLoad[i].position.y,
+                                                   size = planetsToLoad[i].size,
+                                                   image = img,
+                                                   rotationSpeed = planetsToLoad[i].rotationSpeed }))
+    end
+
+    local turretsToLoad = levelToLoad.entities.turrets
+    for i in ipairs(turretsToLoad) do
+        table.insert(turrets, Turret:new({ x = turretsToLoad[i].position.x,
+                                           y = turretsToLoad[i].position.y,
+                                           firingSpeed = turretsToLoad[i].firingSpeed,
+                                           bulletSpeed = turretsToLoad[i].projectileSpeed }))
+    end
+
+    local wallsToLoad = levelToLoad.entities.walls
+    for i in ipairs(wallsToLoad) do
+        table.insert(walls, Wall:new({ x = wallsToLoad[i].position.x,
+                                       y = wallsToLoad[i].position.y,
+                                       w = wallsToLoad[i].size.w,
+                                       h = wallsToLoad[i].size.h }))
+    end
 end
