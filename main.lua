@@ -1,5 +1,3 @@
-local anim8 = require 'libs.anim8'
-local class = require 'libs.middleclass'
 local wf = require 'libs.windfield'
 local json = require 'libs.json'
 
@@ -8,19 +6,22 @@ require 'src.rotatingplanet'
 require 'src.turret'
 require 'src.background'
 require 'src.bullet'
+require 'src.missile'
 require 'src.wall'
 
 local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
+local missileLifetime = 15
 
 local currentLevelName = nil
-local currentLevel = 1
-local levels
+local currentLevel = 6
+local levels = nil
 local turrets = {}
 local planets = {}
 local walls = {}
 bullets = {}
+missiles = {}
 
 function love.load()
     math.randomseed(os.time())
@@ -33,8 +34,9 @@ function love.load()
     world = wf.newWorld(0, 0, true)
     world:setGravity(0, 0)
 
-    world:addCollisionClass('Planet')
     world:addCollisionClass('Bullet', { ignores = { 'Bullet' } })
+    world:addCollisionClass('Missile', { ignores = { 'Bullet', 'Missile' } })
+    world:addCollisionClass('Planet')
     world:addCollisionClass('Player')
     world:addCollisionClass('Wall')
 
@@ -59,6 +61,10 @@ function love.draw()
     for i in ipairs(bullets) do
         love.graphics.setColor(1, 1, 1, 1)
         bullets[i]:draw()
+    end
+    for i in ipairs(missiles) do
+        love.graphics.setColor(1, 1, 1, 1)
+        missiles[i]:draw()
     end
     for i in ipairs(walls) do
         love.graphics.setColor(1, 1, 1, 1)
@@ -145,17 +151,18 @@ function love.update(dt)
         walls[i]:update(dt)
     end
 
-    for i in ipairs(bullets) do
-        bullets[i]:update(dt)
-        if bullets[i]:getBox():enter('Planet') then
-            print 'collision'
-            bullets[i]:destroy(i)
-            break
+    for i, bullet in ipairs(bullets) do
+        if bullet:getBox():enter('Planet') or bullet:getTimeAlive() > bulletLifetime then
+            bullet:destroy(i)
+        else
+            bullet:update(dt)
         end
-        if bullets[i]:getTimeAlive() > bulletLifetime then
-            print 'bullet deleted'
-            bullets[i]:destroy(i)
-            break
+    end
+    for i, missile in ipairs(missiles) do
+        if missile:getBox():enter('Planet') or missile:getTimeAlive() > missileLifetime then
+            missile:destroy(i)
+        else
+            missile:update(dt)
         end
     end
 
@@ -186,6 +193,9 @@ function clearLevel()
     for i in ipairs(bullets) do
         bullets[i]:getBox():destroy()
     end
+    for i in ipairs(missiles) do
+        missiles[i]:getBox():destroy()
+    end
     for i in ipairs(walls) do
         walls[i]:getBox():destroy()
     end
@@ -194,6 +204,7 @@ function clearLevel()
     turrets = {}
     walls = {}
     bullets = {}
+    missiles = {}
     player = nil
 end
 
@@ -222,9 +233,10 @@ function loadLevel(level)
         for i in ipairs(turretsToLoad) do
             table.insert(turrets, Turret:new({ x = turretsToLoad[i].position.x,
                                                y = turretsToLoad[i].position.y,
+                                               type = turretsToLoad[i].type,
                                                startAngle = turretsToLoad[i].startAngle,
                                                firingSpeed = turretsToLoad[i].firingSpeed,
-                                               bulletSpeed = turretsToLoad[i].projectileSpeed,
+                                               projectileSpeed = turretsToLoad[i].projectileSpeed,
                                                shouldTrackPlayer = turretsToLoad[i].tracksPlayer }))
         end
     end

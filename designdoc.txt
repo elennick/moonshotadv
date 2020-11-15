@@ -11,7 +11,8 @@ obstacles (block movement or affect movement but dont kill)
 dangers
 * turrets firing seeking missiles
 * turrets firing bullets
-* static barriers (doesnt kill but blocks movement)
+* static barriers (doesnt kill but blocks movement and bullets)
+* moving barriers (doesnt kill but blocks movement and bullets)
 * laser barriers that turn off and on (do kill)
 
 

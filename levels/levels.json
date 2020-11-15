@@ -489,6 +489,17 @@
                         "x": 1200,
                         "y": 650
                     }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 4,
+                    "projectileSpeed": 2,
+                    "startAngle": -1,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 1200,
+                        "y": 300
+                    }
                 }
             ],
             "walls": [

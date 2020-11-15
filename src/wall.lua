@@ -12,8 +12,6 @@ function Wall:initialize(args)
     self.collider = world:newRectangleCollider(self.x, self.y, self.w, self.h)
     self.collider:setCollisionClass('Wall')
     self.collider:setType('static')
-    --self.collider:setLinearDamping(0, 0)
-    --self.collider:setAngularDamping(0)
     self.collider:setFriction(0)
 end
 
@@ -25,6 +23,7 @@ function Wall:draw()
 end
 
 function Wall:update(dt)
+
 end
 
 function Wall:getBox()

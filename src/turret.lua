@@ -6,15 +6,17 @@ Turret = class('Turret', Entity)
 function Turret:initialize(args)
     Entity.initialize(self, args.x, args.y)
     self.firingSpeed = args.firingSpeed
-    self.bulletSpeed = args.bulletSpeed
-    turretImage = love.graphics.newImage("image/ship_1.png")
+    self.projectileSpeed = args.projectileSpeed
+    self.type = args.type
     self.shouldTrackPlayer = args.shouldTrackPlayer
     self.rotation = args.startAngle or 0
     self.timeSinceLastShot = 0
+
+    self.turretImage = love.graphics.newImage("image/ship_1.png")
 end
 
 function Turret:draw()
-    love.graphics.draw(turretImage, self.x, self.y, self.rotation, 2, 2, turretImage:getWidth() / 2, turretImage:getHeight() / 2)
+    love.graphics.draw(self.turretImage, self.x, self.y, self.rotation, 2, 2, self.turretImage:getWidth() / 2, self.turretImage:getHeight() / 2)
 end
 
 function Turret:update(dt)
@@ -26,11 +28,30 @@ function Turret:update(dt)
 
     if self.timeSinceLastShot > self.firingSpeed then
         self.timeSinceLastShot = 0
-        table.insert(bullets, self:fire())
+
+        if self.type == 'bullet' then
+            table.insert(bullets, self:fireBullet())
+        else
+            table.insert(missiles, self:fireMissile())
+        end
     end
 end
 
-function Turret:fire()
+function Turret:fireBullet()
+    local velx, vely = self:getVelocityOfNextProjectile()
+    local bullet = Bullet:new(self.x - velx * 20, self.y - vely * 20)
+    bullet:getBox():applyLinearImpulse(-velx * self.projectileSpeed, -vely * self.projectileSpeed)
+    return bullet
+end
+
+function Turret:fireMissile()
+    local velx, vely = self:getVelocityOfNextProjectile()
+    local missile = Missile:new(self.x - velx * 20, self.y - vely * 20)
+    missile:getBox():applyLinearImpulse(-velx * self.projectileSpeed, -vely * self.projectileSpeed)
+    return missile
+end
+
+function Turret:getVelocityOfNextProjectile()
     local velx, vely
     if self.shouldTrackPlayer then
         velx, vely = self:getVectorTowardPlayer()
@@ -43,21 +64,7 @@ function Turret:fire()
         velx = math.cos(self.rotation + 1.58)
         vely = math.sin(self.rotation + 1.58)
     end
-
-    local bullet = Bullet:new(self.x - velx * 20, self.y - vely * 20)
-    bullet:getBox():applyLinearImpulse(-velx * self.bulletSpeed, -vely * self.bulletSpeed)
-    return bullet
-end
-
-function Turret:getRadiansTowardPlayer()
-    local x, y = self:getVectorTowardPlayer()
-    return math.atan2(y, x)
-end
-
-function Turret:getVectorTowardPlayer()
-    local vectorXTowardPlayer = self.x - player:getX()
-    local vectorYTowardPlayer = self.y - player:getY()
-    return vectorXTowardPlayer, vectorYTowardPlayer
+    return velx, vely
 end
 
 return Turret
