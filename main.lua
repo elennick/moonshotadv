@@ -14,6 +14,8 @@ local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 
+local currentLevelName = nil
+local currentLevel = 1
 local levels
 local turrets = {}
 local planets = {}
@@ -37,7 +39,7 @@ function love.load()
     world:addCollisionClass('Wall')
 
     background = Background:new()
-    loadLevel(1)
+    loadLevel(currentLevel)
 
     local music = love.audio.newSource("audio/music/manystars.ogg", 'static')
     music:setLooping(true)
@@ -64,6 +66,9 @@ function love.draw()
     end
     player:draw()
     --world:draw()
+
+    local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
+    love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
 end
 
 function love.update(dt)
@@ -88,6 +93,15 @@ function love.update(dt)
     else
         player:getBox():setLinearVelocity(0, 0)
         player:getBox():setAngularVelocity(0)
+        if closestPlanet:getType() == 'moon' then
+            currentLevel = currentLevel + 1
+            loadLevel(currentLevel)
+            return
+        end
+    end
+
+    if player:getBox():enter('Bullet') then
+        restartLevel()
     end
 
     --handle input
@@ -165,7 +179,31 @@ function readFile(file)
     return content
 end
 
+function clearLevel()
+    for i in ipairs(planets) do
+        planets[i]:getBox():destroy()
+    end
+    for i in ipairs(bullets) do
+        bullets[i]:getBox():destroy()
+    end
+    for i in ipairs(walls) do
+        walls[i]:getBox():destroy()
+    end
+
+    planets = {}
+    turrets = {}
+    walls = {}
+    bullets = {}
+    player = nil
+end
+
+function restartLevel()
+    loadLevel(currentLevel)
+end
+
 function loadLevel(level)
+    clearLevel()
+
     local levelToLoad = levels[level]
 
     local playerToLoad = levelToLoad.entities.player
@@ -173,39 +211,31 @@ function loadLevel(level)
 
     local planetsToLoad = levelToLoad.entities.planets
     for i in ipairs(planetsToLoad) do
-        local img
-        if planetsToLoad[i].type == 'lava' then
-            img = love.graphics.newImage("image/planets/Lava.png")
-        elseif planetsToLoad[i].type == 'moon' then
-            img = love.graphics.newImage("image/planets/Baren.png")
-        elseif planetsToLoad[i].type == 'ice' then
-            img = love.graphics.newImage("image/planets/Ice.png")
-        elseif planetsToLoad[i].type == 'earth' then
-            img = love.graphics.newImage("image/planets/Terran.png")
-        elseif planetsToLoad[i].type == 'mech' then
-            img = love.graphics.newImage("image/planets/CO-MechPlanet.png")
-        end
-
         table.insert(planets, RotatingPlanet:new({ x = planetsToLoad[i].position.x,
                                                    y = planetsToLoad[i].position.y,
                                                    size = planetsToLoad[i].size,
-                                                   image = img,
-                                                   rotationSpeed = planetsToLoad[i].rotationSpeed }))
+                                                   type = planetsToLoad[i].type }))
     end
 
     local turretsToLoad = levelToLoad.entities.turrets
-    for i in ipairs(turretsToLoad) do
-        table.insert(turrets, Turret:new({ x = turretsToLoad[i].position.x,
-                                           y = turretsToLoad[i].position.y,
-                                           firingSpeed = turretsToLoad[i].firingSpeed,
-                                           bulletSpeed = turretsToLoad[i].projectileSpeed }))
+    if turretsToLoad ~= nil then
+        for i in ipairs(turretsToLoad) do
+            table.insert(turrets, Turret:new({ x = turretsToLoad[i].position.x,
+                                               y = turretsToLoad[i].position.y,
+                                               firingSpeed = turretsToLoad[i].firingSpeed,
+                                               bulletSpeed = turretsToLoad[i].projectileSpeed }))
+        end
     end
 
     local wallsToLoad = levelToLoad.entities.walls
-    for i in ipairs(wallsToLoad) do
-        table.insert(walls, Wall:new({ x = wallsToLoad[i].position.x,
-                                       y = wallsToLoad[i].position.y,
-                                       w = wallsToLoad[i].size.w,
-                                       h = wallsToLoad[i].size.h }))
+    if wallsToLoad ~= nil then
+        for i in ipairs(wallsToLoad) do
+            table.insert(walls, Wall:new({ x = wallsToLoad[i].position.x,
+                                           y = wallsToLoad[i].position.y,
+                                           w = wallsToLoad[i].size.w,
+                                           h = wallsToLoad[i].size.h }))
+        end
     end
+
+    currentLevelName = levelToLoad.name
 end

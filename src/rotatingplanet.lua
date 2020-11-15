@@ -3,12 +3,31 @@ local Entity = require 'src.entity'
 
 RotatingPlanet = class('RotatingPlanet', Entity)
 
+RotatingPlanet.static.maxRotationSpeed = .1
+
 function RotatingPlanet:initialize(args)
     Entity.initialize(self, args.x, args.y)
     self.size = args.size
-    self.image = args.image
     self.rotationSpeed = args.rotationSpeed
+            or math.random(-RotatingPlanet.maxRotationSpeed, RotatingPlanet.maxRotationSpeed)
     self.rotation = love.math.random(359)
+    self.type = args.type
+
+    if self.rotationSpeed == nil then
+        self.rotationSpeed = math.random(-RotatingPlanet.maxRotationSpeed, RotatingPlanet.maxRotationSpeed)
+    end
+
+    if self.type == 'lava' then
+        self.image = love.graphics.newImage("image/planets/Lava.png")
+    elseif self.type == 'moon' then
+        self.image = love.graphics.newImage("image/planets/Baren.png")
+    elseif self.type == 'ice' then
+        self.image = love.graphics.newImage("image/planets/Ice.png")
+    elseif self.type == 'earth' then
+        self.image = love.graphics.newImage("image/planets/Terran.png")
+    elseif self.type == 'mech' then
+        self.image = love.graphics.newImage("image/planets/CO-MechPlanet.png")
+    end
 
     self.collider = world:newCircleCollider(self.x, self.y, self.size * 24)
     self.collider:setType('static')
@@ -37,6 +56,10 @@ end
 
 function RotatingPlanet:getSize()
     return self.size
+end
+
+function RotatingPlanet:getType()
+    return self.type
 end
 
 return RotatingPlanet
