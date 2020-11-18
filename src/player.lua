@@ -53,4 +53,8 @@ function Player:getBox()
     return self.collider
 end
 
+function Player:destroy()
+    self.collider:destroy()
+end
+
 return Player

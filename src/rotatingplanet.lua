@@ -3,7 +3,7 @@ local Entity = require 'src.entity'
 
 RotatingPlanet = class('RotatingPlanet', Entity)
 
-RotatingPlanet.static.maxRotationSpeed = .1
+RotatingPlanet.static.maxRotationSpeed = .5
 
 function RotatingPlanet:initialize(args)
     Entity.initialize(self, args.x, args.y)

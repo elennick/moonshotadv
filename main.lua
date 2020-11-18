@@ -7,6 +7,7 @@ require 'src.turret'
 require 'src.background'
 require 'src.bullet'
 require 'src.missile'
+require 'src.explosion'
 require 'src.wall'
 
 local lastJumped = 0
@@ -15,13 +16,14 @@ local bulletLifetime = 10 --how long a bullet lives before being destroyed (if i
 local missileLifetime = 20
 
 local currentLevelName = nil
-local currentLevel = 1
+local currentLevel = 7
 local levels = nil
 local turrets = {}
 local planets = {}
 local walls = {}
 bullets = {}
 missiles = {}
+explosions = {}
 
 function love.load()
     math.randomseed(os.time())
@@ -65,6 +67,10 @@ function love.draw()
     for i in ipairs(missiles) do
         love.graphics.setColor(1, 1, 1, 1)
         missiles[i]:draw()
+    end
+    for i in ipairs(explosions) do
+        love.graphics.setColor(1, 1, 1, 1)
+        explosions[i]:draw()
     end
     for i in ipairs(walls) do
         love.graphics.setColor(1, 1, 1, 1)
@@ -153,16 +159,27 @@ function love.update(dt)
 
     for i, bullet in ipairs(bullets) do
         if bullet:getBox():enter('Planet') or bullet:getTimeAlive() > bulletLifetime then
+            local explosion = Explosion:new(bullet:getX(), bullet:getY(), .5, 1)
+            table.insert(explosions, explosion)
             bullet:destroy(i)
         else
             bullet:update(dt)
         end
     end
     for i, missile in ipairs(missiles) do
-        if missile:getBox():enter('Planet') or missile:getTimeAlive() > missileLifetime then
+        if missile:getBox():enter('Planet') or missile:getBox():enter('Wall') or missile:getTimeAlive() > missileLifetime then
+            local explosion = Explosion:new(missile:getX(), missile:getY(), 1, 2.5)
+            table.insert(explosions, explosion)
             missile:destroy(i)
         else
             missile:update(dt)
+        end
+    end
+    for i, explosion in ipairs(explosions) do
+        if explosion:getTimeAlive() > explosion:getLifetime() then
+            table.remove(explosions, i)
+        else
+            explosion:update(dt)
         end
     end
 
@@ -199,12 +216,16 @@ function clearLevel()
     for i in ipairs(walls) do
         walls[i]:getBox():destroy()
     end
+    if player ~= nil then
+        player:destroy()
+    end
 
     planets = {}
     turrets = {}
     walls = {}
     bullets = {}
     missiles = {}
+    explosions = {}
     player = nil
 end
 

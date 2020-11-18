@@ -516,6 +516,137 @@
         }
     },
     {
+        "name": "Spiral Out",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 640,
+                    "y": 250
+                }
+            },
+            "planets": [
+                {
+                    "type": "ice",
+                    "size": 3,
+                    "position": {
+                        "x": 640,
+                        "y": 300
+                    }
+                },
+                {
+                    "type": "mech",
+                    "size": 2,
+                    "position": {
+                        "x": 450,
+                        "y": 250
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 2,
+                    "position": {
+                        "x": 350,
+                        "y": 400
+                    }
+                },
+                {
+                    "type": "earth",
+                    "size": 2,
+                    "position": {
+                        "x": 400,
+                        "y": 575
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 2,
+                    "position": {
+                        "x": 600,
+                        "y": 625
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 2,
+                    "position": {
+                        "x": 800,
+                        "y": 575
+                    }
+                },
+                {
+                    "type": "mech",
+                    "size": 2,
+                    "position": {
+                        "x": 950,
+                        "y": 450
+                    }
+                },
+                {
+                    "type": "earth",
+                    "size": 2,
+                    "position": {
+                        "x": 1000,
+                        "y": 275
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 2,
+                    "position": {
+                        "x": 975,
+                        "y": 100
+                    }
+                }
+            ],
+            "turrets": [
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2,
+                    "projectileSpeed": 10,
+                    "startAngle": 1.5,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 40,
+                        "y": 40
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 1,
+                    "projectileSpeed": 20,
+                    "startAngle": 1.58,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 40,
+                        "y": 155
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 3,
+                    "startAngle": 1.5,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 1240,
+                        "y": 40
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 3,
+                    "startAngle": 1.5,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 1240,
+                        "y": 680
+                    }
+                }
+            ]
+        }
+    },
+    {
         "name": "Sandbox",
         "entities": {
             "player": {
