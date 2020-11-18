@@ -658,17 +658,97 @@
             "planets": [
                 {
                     "type": "lava",
-                    "size": 5,
+                    "size": 3,
                     "position": {
-                        "x": 640,
-                        "y": 550
+                        "x": 550,
+                        "y": 575
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 2,
+                    "position": {
+                        "x": 750,
+                        "y": 575
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 2,
+                    "position": {
+                        "x": 1100,
+                        "y": 400
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 2,
+                    "position": {
+                        "x": 1100,
+                        "y": 200
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 2,
+                    "position": {
+                        "x": 850,
+                        "y": 300
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 2,
+                    "position": {
+                        "x": 925,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 3,
+                    "position": {
+                        "x": 675,
+                        "y": 100
+                    }
+                }
+            ],
+            "walls": [
+                {
+                    "position": {
+                        "x": 625,
+                        "y": 0
+                    },
+                    "size": {
+                        "w": 20,
+                        "h": 125
+                    }
+                },
+                {
+                    "position": {
+                        "x": 625,
+                        "y": 500
+                    },
+                    "size": {
+                        "w": 20,
+                        "h": 250
+                    }
+                },
+                {
+                    "position": {
+                        "x": 1000,
+                        "y": 300
+                    },
+                    "size": {
+                        "w": 300,
+                        "h": 10
                     }
                 }
             ],
             "turrets": [
                 {
                     "type": "bullet",
-                    "firingSpeed": 0.65,
+                    "firingSpeed": 0.75,
                     "projectileSpeed": 5,
                     "startAngle": -0.25,
                     "tracksPlayer": false,
@@ -679,7 +759,7 @@
                 },
                 {
                     "type": "bullet",
-                    "firingSpeed": 0.65,
+                    "firingSpeed": 0.75,
                     "projectileSpeed": 5,
                     "startAngle": 3.39,
                     "tracksPlayer": false,
