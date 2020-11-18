@@ -5,7 +5,7 @@ local Entity = require 'src.entity'
 
 Missile = class('Missile', Entity)
 
-Missile.static.baseMaxSpeed = 50
+Missile.static.baseMaxSpeed = 75
 
 function Missile:initialize(x, y, projectileSpeed)
     Entity.initialize(self, x, y)

@@ -16,7 +16,7 @@ local bulletLifetime = 10 --how long a bullet lives before being destroyed (if i
 local missileLifetime = 20
 
 local currentLevelName = nil
-local currentLevel = 7
+local currentLevel = 8
 local levels = nil
 local turrets = {}
 local planets = {}
@@ -36,8 +36,8 @@ function love.load()
     world = wf.newWorld(0, 0, true)
     world:setGravity(0, 0)
 
-    world:addCollisionClass('Bullet', { ignores = { 'Bullet' } })
-    world:addCollisionClass('Missile', { ignores = { 'Bullet', 'Missile' } })
+    world:addCollisionClass('Missile', { ignores = { 'Missile' } })
+    world:addCollisionClass('Bullet', { ignores = { 'Bullet', 'Missile' } })
     world:addCollisionClass('Planet')
     world:addCollisionClass('Player')
     world:addCollisionClass('Wall')
@@ -167,7 +167,7 @@ function love.update(dt)
         end
     end
     for i, missile in ipairs(missiles) do
-        if missile:getBox():enter('Planet') or missile:getBox():enter('Wall') or missile:getTimeAlive() > missileLifetime then
+        if missile:getBox():enter('Planet') or missile:getBox():enter('Wall') or missile:getBox():enter('Bullet') or missile:getTimeAlive() > missileLifetime then
             local explosion = Explosion:new(missile:getX(), missile:getY(), 1, 2.5)
             table.insert(explosions, explosion)
             missile:destroy(i)

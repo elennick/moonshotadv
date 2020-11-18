@@ -647,6 +647,106 @@
         }
     },
     {
+        "name": "Bullet Command",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 640,
+                    "y": 700
+                }
+            },
+            "planets": [
+                {
+                    "type": "lava",
+                    "size": 5,
+                    "position": {
+                        "x": 640,
+                        "y": 550
+                    }
+                }
+            ],
+            "turrets": [
+                {
+                    "type": "bullet",
+                    "firingSpeed": 0.65,
+                    "projectileSpeed": 5,
+                    "startAngle": -0.25,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 340,
+                        "y": 650
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 0.65,
+                    "projectileSpeed": 5,
+                    "startAngle": 3.39,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 340,
+                        "y": 70
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 0.5,
+                    "projectileSpeed": 4,
+                    "startAngle": 1.58,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 50,
+                        "y": 140
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 0.5,
+                    "projectileSpeed": 4,
+                    "startAngle": 1.58,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 50,
+                        "y": 240
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 0.5,
+                    "projectileSpeed": 4,
+                    "startAngle": 1.58,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 50,
+                        "y": 340
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 0.5,
+                    "projectileSpeed": 4,
+                    "startAngle": 1.58,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 50,
+                        "y": 440
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 0.5,
+                    "projectileSpeed": 4,
+                    "startAngle": 1.58,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 50,
+                        "y": 540
+                    }
+                }
+            ]
+        }
+    },
+    {
         "name": "Sandbox",
         "entities": {
             "player": {
@@ -770,7 +870,7 @@
                     },
                     "size": {
                         "w": 100,
-                        "h": 5
+                        "h": 10
                     }
                 }
             ]

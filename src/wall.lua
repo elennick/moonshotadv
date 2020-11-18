@@ -13,17 +13,17 @@ function Wall:initialize(args)
     self.collider:setCollisionClass('Wall')
     self.collider:setType('static')
     self.collider:setFriction(0)
+
+    self.image = love.graphics.newImage("image/wall.png")
+    self.image:setWrap("repeat", "repeat")
+    self.quad = love.graphics.newQuad(32, 32, self.w, self.h, self.image:getDimensions())
 end
 
 function Wall:draw()
-    love.graphics.setColor(.5, .5, .5, 1)
-    love.graphics.rectangle('fill', self.x + 1, self.y + 1, self.w - 2, self.h - 2, 2, 2)
-    love.graphics.setColor(.2, .2, 1, 1)
-    love.graphics.rectangle('line', self.x, self.y, self.w, self.h, 2, 2)
+    love.graphics.draw(self.image, self.quad, self.x, self.y, self.rotation)
 end
 
 function Wall:update(dt)
-
 end
 
 function Wall:getBox()
