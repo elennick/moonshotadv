@@ -30,4 +30,8 @@ function Wall:getBox()
     return self.collider
 end
 
+function Wall:destroy()
+    self.collider:destroy()
+end
+
 return Wall

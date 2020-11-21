@@ -10,7 +10,7 @@ function Background:initialize()
 end
 
 function Background:draw()
-    love.graphics.setColor(1, 1, 1, .4)
+    love.graphics.setColor(1, 1, 1, .3)
     self.animation:draw(self.spriteSheet, 0, 0, 0, 1, 1)
     self.animation:draw(self.spriteSheet, 320, 0, 0, 1, 1)
     self.animation:draw(self.spriteSheet, 640, 0, 0, 1, 1)

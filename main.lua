@@ -16,11 +16,10 @@ local bulletLifetime = 10 --how long a bullet lives before being destroyed (if i
 local missileLifetime = 20
 
 local currentLevelName = nil
-local currentLevel = 1
+local currentLevel = 9
 local levels = nil
-local turrets = {}
+local entities = {}
 local planets = {}
-local walls = {}
 bullets = {}
 missiles = {}
 explosions = {}
@@ -52,9 +51,9 @@ end
 
 function love.draw()
     background:draw()
-    for i in ipairs(turrets) do
+    for i in ipairs(entities) do
         love.graphics.setColor(1, 1, 1, 1)
-        turrets[i]:draw()
+        entities[i]:draw()
     end
     for i in ipairs(planets) do
         love.graphics.setColor(1, 1, 1, 1)
@@ -72,10 +71,7 @@ function love.draw()
         love.graphics.setColor(1, 1, 1, 1)
         explosions[i]:draw()
     end
-    for i in ipairs(walls) do
-        love.graphics.setColor(1, 1, 1, 1)
-        walls[i]:draw()
-    end
+
     player:draw()
     --world:draw()
 
@@ -145,16 +141,12 @@ function love.update(dt)
     world:update(dt)
     background:update(dt)
 
-    for i in ipairs(turrets) do
-        turrets[i]:update(dt)
+    for i in ipairs(entities) do
+        entities[i]:update(dt)
     end
 
     for i in ipairs(planets) do
         planets[i]:update(dt)
-    end
-
-    for i in ipairs(walls) do
-        walls[i]:update(dt)
     end
 
     for i, bullet in ipairs(bullets) do
@@ -204,6 +196,9 @@ function readFile(file)
 end
 
 function clearLevel()
+    for i in ipairs(entities) do
+        entities[i]:destroy()
+    end
     for i in ipairs(planets) do
         planets[i]:getBox():destroy()
     end
@@ -213,16 +208,12 @@ function clearLevel()
     for i in ipairs(missiles) do
         missiles[i]:getBox():destroy()
     end
-    for i in ipairs(walls) do
-        walls[i]:getBox():destroy()
-    end
     if player ~= nil then
         player:destroy()
     end
 
+    entities = {}
     planets = {}
-    turrets = {}
-    walls = {}
     bullets = {}
     missiles = {}
     explosions = {}
@@ -252,23 +243,23 @@ function loadLevel(level)
     local turretsToLoad = levelToLoad.entities.turrets
     if turretsToLoad ~= nil then
         for i in ipairs(turretsToLoad) do
-            table.insert(turrets, Turret:new({ x = turretsToLoad[i].position.x,
-                                               y = turretsToLoad[i].position.y,
-                                               type = turretsToLoad[i].type,
-                                               startAngle = turretsToLoad[i].startAngle,
-                                               firingSpeed = turretsToLoad[i].firingSpeed,
-                                               projectileSpeed = turretsToLoad[i].projectileSpeed,
-                                               shouldTrackPlayer = turretsToLoad[i].tracksPlayer }))
+            table.insert(entities, Turret:new({ x = turretsToLoad[i].position.x,
+                                                y = turretsToLoad[i].position.y,
+                                                type = turretsToLoad[i].type,
+                                                startAngle = turretsToLoad[i].startAngle,
+                                                firingSpeed = turretsToLoad[i].firingSpeed,
+                                                projectileSpeed = turretsToLoad[i].projectileSpeed,
+                                                shouldTrackPlayer = turretsToLoad[i].tracksPlayer }))
         end
     end
 
     local wallsToLoad = levelToLoad.entities.walls
     if wallsToLoad ~= nil then
         for i in ipairs(wallsToLoad) do
-            table.insert(walls, Wall:new({ x = wallsToLoad[i].position.x,
-                                           y = wallsToLoad[i].position.y,
-                                           w = wallsToLoad[i].size.w,
-                                           h = wallsToLoad[i].size.h }))
+            table.insert(entities, Wall:new({ x = wallsToLoad[i].position.x,
+                                              y = wallsToLoad[i].position.y,
+                                              w = wallsToLoad[i].size.w,
+                                              h = wallsToLoad[i].size.h }))
         end
     end
 

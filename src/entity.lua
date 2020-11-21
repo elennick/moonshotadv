@@ -30,4 +30,16 @@ function Entity:getRadiansTowardPlayer()
     return math.atan2(y, x)
 end
 
+function Entity:destroy()
+    --override if necessary
+end
+
+function Entity:update(dt)
+    --override if necessary
+end
+
+function Entity:draw()
+    --override if necessary
+end
+
 return Entity
