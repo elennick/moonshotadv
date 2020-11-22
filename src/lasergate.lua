@@ -7,6 +7,8 @@ LaserGate = class('LaserGate', Entity)
 function LaserGate:initialize(args)
     Entity.initialize(self, args.x, args.y)
     self.direction = args.direction
+    self.length = args.length
+    self.switchRate = args.switchRate
     self.gateIsOn = false
     self.timeSinceLastChange = 0
 
@@ -28,9 +30,9 @@ function LaserGate:initialize(args)
 
     --create bottom block
     if self.direction == 'horizontal' then
-        self.bottomBlockCollider = world:newRectangleCollider(self.x - 116, self.y, 16, 16)
+        self.bottomBlockCollider = world:newRectangleCollider(self.x - self.length - 16, self.y, 16, 16)
     else
-        self.bottomBlockCollider = world:newRectangleCollider(self.x, self.y + 100, 16, 16)
+        self.bottomBlockCollider = world:newRectangleCollider(self.x, self.y + self.length, 16, 16)
     end
     self.bottomBlockCollider:setCollisionClass('Wall')
     self.bottomBlockCollider:setType('static')
@@ -38,9 +40,9 @@ function LaserGate:initialize(args)
 
     --create laser
     if self.direction == 'horizontal' then
-        self.laserCollider = world:newRectangleCollider(self.x - 100, self.y, 100, 16)
+        self.laserCollider = world:newRectangleCollider(self.x - self.length, self.y, self.length, 16)
     else
-        self.laserCollider = world:newRectangleCollider(self.x, self.y + 16, 16, 100)
+        self.laserCollider = world:newRectangleCollider(self.x, self.y + 16, 16, self.length)
     end
     self.laserCollider:setCollisionClass('Laser')
     self.laserCollider:setType('static')
@@ -61,10 +63,10 @@ function LaserGate:draw()
     love.graphics.rotate(self.rotation)
 
     love.graphics.draw(self.wall, 0, 0, 0, .5, .5)
+    love.graphics.draw(self.wall, 0, self.length, 0, .5, .5)
     if self.gateIsOn then
-        self.animation:draw(self.spriteSheet, 1, 16)
+        self.animation:draw(self.spriteSheet, 1, 16, 0, 1, (self.length - 16) / 85)
     end
-    love.graphics.draw(self.wall, 0, 100, 0, .5, .5)
 
     love.graphics.pop()
 end
@@ -72,7 +74,7 @@ end
 function LaserGate:update(dt)
     self.animation:update(dt)
     self.timeSinceLastChange = self.timeSinceLastChange + dt
-    if self.timeSinceLastChange > 1 then
+    if self.timeSinceLastChange > self.switchRate then
         self.gateIsOn = not self.gateIsOn
         self.timeSinceLastChange = 0
         if self.gateIsOn then
@@ -81,6 +83,16 @@ function LaserGate:update(dt)
             self.laserCollider:setActive(false)
         end
     end
+
+    if self.laserCollider:isActive() and self.laserCollider:enter('Player') then
+        restartLevel()
+    end
+end
+
+function LaserGate:destroy()
+    self.topBlockCollider:destroy()
+    self.bottomBlockCollider:destroy()
+    self.laserCollider:destroy()
 end
 
 return LaserGate

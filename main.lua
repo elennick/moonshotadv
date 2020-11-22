@@ -24,6 +24,7 @@ local planets = {}
 bullets = {}
 missiles = {}
 explosions = {}
+player = nil
 
 function love.load()
     math.randomseed(os.time())
@@ -75,7 +76,7 @@ function love.draw()
     end
 
     player:draw()
-    world:draw()
+    --world:draw()
 
     local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
     love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
@@ -161,7 +162,11 @@ function love.update(dt)
         end
     end
     for i, missile in ipairs(missiles) do
-        if missile:getBox():enter('Planet') or missile:getBox():enter('Wall') or missile:getBox():enter('Bullet') or missile:getTimeAlive() > missileLifetime then
+        if missile:getBox():enter('Planet')
+                or missile:getBox():enter('Wall')
+                or missile:getBox():enter('Bullet')
+                or missile:getBox():enter('Laser')
+                or missile:getTimeAlive() > missileLifetime then
             local explosion = Explosion:new(missile:getX(), missile:getY(), 1, 2.5)
             table.insert(explosions, explosion)
             missile:destroy(i)
@@ -270,7 +275,9 @@ function loadLevel(level)
         for i in ipairs(laserGatesToLoad) do
             table.insert(entities, LaserGate:new({ x = laserGatesToLoad[i].position.x,
                                                    y = laserGatesToLoad[i].position.y,
-                                                   direction = laserGatesToLoad[i].direction }))
+                                                   direction = laserGatesToLoad[i].direction,
+                                                   length = laserGatesToLoad[i].length,
+                                                   switchRate = laserGatesToLoad[i].switchRate }))
         end
     end
 

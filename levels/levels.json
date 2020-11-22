@@ -937,17 +937,21 @@
             "laserGates": [
                 {
                     "position": {
-                        "x": 700,
-                        "y": 100
+                        "x": 1100,
+                        "y": 50
                     },
-                    "direction": "vertical"
+                    "direction": "vertical",
+                    "length": 600,
+                    "switchRate": 3
                 },
                 {
                     "position": {
                         "x": 500,
                         "y": 350
                     },
-                    "direction": "horizontal"
+                    "direction": "horizontal",
+                    "length": 50,
+                    "switchRate": 1
                 }
             ]
         }
