@@ -9,6 +9,7 @@ require 'src.bullet'
 require 'src.missile'
 require 'src.explosion'
 require 'src.wall'
+require 'src.lasergate'
 
 local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
@@ -40,6 +41,7 @@ function love.load()
     world:addCollisionClass('Planet')
     world:addCollisionClass('Player')
     world:addCollisionClass('Wall')
+    world:addCollisionClass('Laser')
 
     background = Background:new()
     loadLevel(currentLevel)
@@ -73,7 +75,7 @@ function love.draw()
     end
 
     player:draw()
-    --world:draw()
+    world:draw()
 
     local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
     love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
@@ -260,6 +262,15 @@ function loadLevel(level)
                                               y = wallsToLoad[i].position.y,
                                               w = wallsToLoad[i].size.w,
                                               h = wallsToLoad[i].size.h }))
+        end
+    end
+
+    local laserGatesToLoad = levelToLoad.entities.laserGates
+    if laserGatesToLoad ~= nil then
+        for i in ipairs(laserGatesToLoad) do
+            table.insert(entities, LaserGate:new({ x = laserGatesToLoad[i].position.x,
+                                                   y = laserGatesToLoad[i].position.y,
+                                                   direction = laserGatesToLoad[i].direction }))
         end
     end
 

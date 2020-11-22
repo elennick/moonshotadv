@@ -932,26 +932,22 @@
                         "w": 10,
                         "h": 150
                     }
-                },
+                }
+            ],
+            "laserGates": [
                 {
                     "position": {
                         "x": 700,
                         "y": 100
                     },
-                    "size": {
-                        "w": 10,
-                        "h": 75
-                    }
+                    "direction": "vertical"
                 },
                 {
                     "position": {
-                        "x": 425,
+                        "x": 500,
                         "y": 350
                     },
-                    "size": {
-                        "w": 100,
-                        "h": 10
-                    }
+                    "direction": "horizontal"
                 }
             ]
         }
