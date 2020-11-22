@@ -3,13 +3,12 @@ local Entity = require 'src.entity'
 
 RotatingPlanet = class('RotatingPlanet', Entity)
 
-RotatingPlanet.static.maxRotationSpeed = .5
+RotatingPlanet.static.maxRotationSpeed = .03
 
 function RotatingPlanet:initialize(args)
     Entity.initialize(self, args.x, args.y)
     self.size = args.size
-    self.rotationSpeed = args.rotationSpeed
-            or math.random(-RotatingPlanet.maxRotationSpeed, RotatingPlanet.maxRotationSpeed)
+    self.rotationSpeed = math.random(-RotatingPlanet.maxRotationSpeed, RotatingPlanet.maxRotationSpeed)
     self.rotation = love.math.random(359)
     self.type = args.type
 
@@ -29,6 +28,8 @@ function RotatingPlanet:initialize(args)
         self.image = love.graphics.newImage("image/planets/CO-MechPlanet.png")
     end
 
+    self.flagImage = love.graphics.newImage("image/flag.png")
+
     self.collider = world:newCircleCollider(self.x, self.y, self.size * 24)
     self.collider:setType('static')
     self.collider:setFriction(0.25)
@@ -36,11 +37,24 @@ function RotatingPlanet:initialize(args)
 end
 
 function RotatingPlanet:draw()
+    love.graphics.push("all")
+    love.graphics.translate(self.x, self.y)
+    love.graphics.rotate(self.rotation)
+
     love.graphics.draw(self.image,
-            self.x, self.y,
-            self.rotation,
-            self.size, self.size,
-            self.image:getWidth() / 2, self.image:getHeight() / 2)
+            0,
+            0,
+            0,
+            self.size,
+            self.size,
+            self.image:getWidth() / 2,
+            self.image:getHeight() / 2)
+
+    if self.type == 'moon' then
+        love.graphics.draw(self.flagImage, 0, (self.size * 24) + self.flagImage:getHeight(), 3.14)
+    end
+
+    love.graphics.pop()
 end
 
 function RotatingPlanet:update(dt)

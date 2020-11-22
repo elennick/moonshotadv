@@ -17,7 +17,7 @@ local bulletLifetime = 10 --how long a bullet lives before being destroyed (if i
 local missileLifetime = 20
 
 local currentLevelName = nil
-local currentLevel = 9
+local currentLevel = 1
 local levels = nil
 local entities = {}
 local planets = {}

@@ -82,7 +82,7 @@
         }
     },
     {
-        "name": "Walled Off",
+        "name": "Beautiful Butterfly",
         "entities": {
             "player": {
                 "startPosition": {
@@ -261,7 +261,7 @@
             "turrets": [
                 {
                     "type": "bullet",
-                    "firingSpeed": 3,
+                    "firingSpeed": 5,
                     "projectileSpeed": 6,
                     "startAngle": 3.12,
                     "tracksPlayer": false,
@@ -283,7 +283,7 @@
                 },
                 {
                     "type": "bullet",
-                    "firingSpeed": 3,
+                    "firingSpeed": 5,
                     "projectileSpeed": 6,
                     "startAngle": 3.12,
                     "tracksPlayer": false,
@@ -305,7 +305,7 @@
                 },
                 {
                     "type": "bullet",
-                    "firingSpeed": 3,
+                    "firingSpeed": 5,
                     "projectileSpeed": 6,
                     "startAngle": 3.12,
                     "tracksPlayer": false,
@@ -327,7 +327,7 @@
                 },
                 {
                     "type": "bullet",
-                    "firingSpeed": 3,
+                    "firingSpeed": 5,
                     "projectileSpeed": 6,
                     "startAngle": 3.12,
                     "tracksPlayer": false,
@@ -349,7 +349,7 @@
                 },
                 {
                     "type": "bullet",
-                    "firingSpeed": 3,
+                    "firingSpeed": 5,
                     "projectileSpeed": 6,
                     "startAngle": 0.0,
                     "tracksPlayer": false,
@@ -371,7 +371,7 @@
                 },
                 {
                     "type": "bullet",
-                    "firingSpeed": 3,
+                    "firingSpeed": 5,
                     "projectileSpeed": 6,
                     "startAngle": 0.0,
                     "tracksPlayer": false,
@@ -651,8 +651,8 @@
         "entities": {
             "player": {
                 "startPosition": {
-                    "x": 640,
-                    "y": 700
+                    "x": 625,
+                    "y": 675
                 }
             },
             "planets": [
@@ -668,7 +668,7 @@
                     "type": "ice",
                     "size": 2,
                     "position": {
-                        "x": 750,
+                        "x": 775,
                         "y": 575
                     }
                 },
@@ -676,57 +676,47 @@
                     "type": "ice",
                     "size": 2,
                     "position": {
-                        "x": 1100,
-                        "y": 400
+                        "x": 985,
+                        "y": 560
                     }
                 },
                 {
                     "type": "ice",
                     "size": 2,
                     "position": {
-                        "x": 1100,
-                        "y": 200
+                        "x": 1075,
+                        "y": 360
                     }
                 },
                 {
                     "type": "ice",
                     "size": 2,
                     "position": {
-                        "x": 850,
-                        "y": 300
+                        "x": 985,
+                        "y": 165
                     }
                 },
                 {
                     "type": "ice",
                     "size": 2,
                     "position": {
-                        "x": 925,
-                        "y": 100
+                        "x": 785,
+                        "y": 150
                     }
                 },
                 {
                     "type": "moon",
-                    "size": 3,
+                    "size": 2,
                     "position": {
-                        "x": 675,
-                        "y": 100
+                        "x": 650,
+                        "y": 50
                     }
                 }
             ],
             "walls": [
                 {
                     "position": {
-                        "x": 625,
-                        "y": 0
-                    },
-                    "size": {
-                        "w": 20,
-                        "h": 125
-                    }
-                },
-                {
-                    "position": {
-                        "x": 625,
+                        "x": 675,
                         "y": 500
                     },
                     "size": {
@@ -736,12 +726,22 @@
                 },
                 {
                     "position": {
-                        "x": 1000,
-                        "y": 300
+                        "x": 1100,
+                        "y": 360
                     },
                     "size": {
                         "w": 300,
                         "h": 10
+                    }
+                },
+                {
+                    "position": {
+                        "x": 775,
+                        "y": 0
+                    },
+                    "size": {
+                        "w": 20,
+                        "h": 125
                     }
                 }
             ],
@@ -776,7 +776,7 @@
                     "tracksPlayer": true,
                     "position": {
                         "x": 50,
-                        "y": 140
+                        "y": 60
                     }
                 },
                 {
@@ -787,7 +787,7 @@
                     "tracksPlayer": true,
                     "position": {
                         "x": 50,
-                        "y": 240
+                        "y": 180
                     }
                 },
                 {
@@ -798,7 +798,7 @@
                     "tracksPlayer": true,
                     "position": {
                         "x": 50,
-                        "y": 340
+                        "y": 300
                     }
                 },
                 {
@@ -809,7 +809,7 @@
                     "tracksPlayer": true,
                     "position": {
                         "x": 50,
-                        "y": 440
+                        "y": 420
                     }
                 },
                 {
@@ -821,6 +821,17 @@
                     "position": {
                         "x": 50,
                         "y": 540
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 0.5,
+                    "projectileSpeed": 4,
+                    "startAngle": 1.58,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 50,
+                        "y": 660
                     }
                 }
             ]

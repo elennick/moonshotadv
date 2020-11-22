@@ -26,3 +26,14 @@ game systems required:
 game screens required:
 * title screen - can be simple and just have a title and describe controls
 * gameplay screen - loads levels and lets the player play them
+
+
+
+misc
+* timer to track how long it takes to beat a level, potentially tracking high scores / fastest times
+* death animation
+* flag on moon
+* fix missile homing
+* menu + menu music + title logo stuff
+* level start countdown thing
+* sound effects
