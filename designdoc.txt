@@ -29,7 +29,7 @@ game screens required:
 
 
 
-misc
+misc todo
 * timer to track how long it takes to beat a level, potentially tracking high scores / fastest times
 * death animation
 * flag on moon
@@ -37,3 +37,7 @@ misc
 * menu + menu music + title logo stuff
 * level start countdown thing
 * sound effects
+
+level ideas
+* level where player has to bunker down behind walls
+* level where laser gates opening causes a barrage of fire to come through

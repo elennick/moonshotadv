@@ -11,11 +11,12 @@ function LaserGate:initialize(args)
     self.switchRate = args.switchRate
     self.gateIsOn = false
     self.timeSinceLastChange = 0
+    self.frameHeight = 85
 
     --load graphics
     self.wall = love.graphics.newImage("image/wall.png")
     self.spriteSheet = love.graphics.newImage("image/lasers-spritesheet.png")
-    self.frames = anim8.newGrid(13, 85, self.spriteSheet:getWidth(), self.spriteSheet:getHeight(), 0, 700)
+    self.frames = anim8.newGrid(13, self.frameHeight, self.spriteSheet:getWidth(), self.spriteSheet:getHeight(), 0, 700)
     self.animation = anim8.newAnimation(self.frames('2-23', 1), .05)
 
     --create top block
@@ -65,7 +66,7 @@ function LaserGate:draw()
     love.graphics.draw(self.wall, 0, 0, 0, .5, .5)
     love.graphics.draw(self.wall, 0, self.length, 0, .5, .5)
     if self.gateIsOn then
-        self.animation:draw(self.spriteSheet, 1, 16, 0, 1, (self.length - 16) / 85)
+        self.animation:draw(self.spriteSheet, 1, 16, 0, 1, (self.length - 16) / self.frameHeight)
     end
 
     love.graphics.pop()

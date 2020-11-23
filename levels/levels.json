@@ -748,24 +748,24 @@
             "turrets": [
                 {
                     "type": "bullet",
-                    "firingSpeed": 0.75,
-                    "projectileSpeed": 5,
+                    "firingSpeed": 0.6,
+                    "projectileSpeed": 6,
                     "startAngle": -0.25,
                     "tracksPlayer": false,
                     "position": {
                         "x": 340,
-                        "y": 650
+                        "y": 680
                     }
                 },
                 {
                     "type": "bullet",
-                    "firingSpeed": 0.75,
-                    "projectileSpeed": 5,
+                    "firingSpeed": 0.6,
+                    "projectileSpeed": 6,
                     "startAngle": 3.39,
                     "tracksPlayer": false,
                     "position": {
                         "x": 340,
-                        "y": 70
+                        "y": 40
                     }
                 },
                 {
@@ -834,6 +834,199 @@
                         "y": 660
                     }
                 }
+            ]
+        }
+    },
+    {
+        "name": "Fricken Laser Beams",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 100,
+                    "y": 360
+                }
+            },
+            "planets": [
+                {
+                    "type": "mech",
+                    "size": 5,
+                    "position": {
+                        "x": 250,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "earth",
+                    "size": 5,
+                    "position": {
+                        "x": 640,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 5,
+                    "position": {
+                        "x": 1030,
+                        "y": 360
+                    }
+                }
+            ],
+            "laserGates": [
+                {
+                    "position": {
+                        "x": 440,
+                        "y": 190
+                    },
+                    "direction": "vertical",
+                    "length": 320,
+                    "switchRate": 3
+                },
+                {
+                    "position": {
+                        "x": 830,
+                        "y": 190
+                    },
+                    "direction": "vertical",
+                    "length": 320,
+                    "switchRate": 1
+                }
+            ]
+        }
+    },
+    {
+        "name": "A Little Harder Now",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 100,
+                    "y": 360
+                }
+            },
+            "planets": [
+                {
+                    "type": "mech",
+                    "size": 4,
+                    "position": {
+                        "x": 200,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "earth",
+                    "size": 4,
+                    "position": {
+                        "x": 490,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 4,
+                    "position": {
+                        "x": 790,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 4,
+                    "position": {
+                        "x": 1080,
+                        "y": 360
+                    }
+                }
+            ],
+            "laserGates": [
+                {
+                    "position": {
+                        "x": 340,
+                        "y": 190
+                    },
+                    "direction": "vertical",
+                    "length": 320,
+                    "switchRate": 2
+                },
+                {
+                    "position": {
+                        "x": 630,
+                        "y": 190
+                    },
+                    "direction": "vertical",
+                    "length": 320,
+                    "switchRate": 1.5
+                },
+                {
+                    "position": {
+                        "x": 930,
+                        "y": 190
+                    },
+                    "direction": "vertical",
+                    "length": 320,
+                    "switchRate": 1
+                }
+            ],
+            "turrets": [
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2,
+                    "projectileSpeed": 5,
+                    "startAngle": -1,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 75,
+                        "y": 75
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2.5,
+                    "projectileSpeed": 5,
+                    "startAngle": -1,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 75,
+                        "y": 645
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2.5,
+                    "projectileSpeed": 5,
+                    "startAngle": -1,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 1205,
+                        "y": 75
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2,
+                    "projectileSpeed": 5,
+                    "startAngle": -1,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 1205,
+                        "y": 645
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "name": "Gate Gauntlet",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 1000,
+                    "y": 25
+                }
+            },
+            "planets": [
+                {},
+                {},
+                {}
             ]
         }
     },
