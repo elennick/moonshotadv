@@ -1,6 +1,6 @@
 [
     {
-        "name": "Title Screen!",
+        "name": "Title Screen",
         "entities": {
             "player": {
                 "startPosition": {
@@ -14,7 +14,7 @@
                     "size": 5,
                     "position": {
                         "x": 425,
-                        "y": 460
+                        "y": 425
                     }
                 },
                 {
@@ -22,14 +22,14 @@
                     "size": 5,
                     "position": {
                         "x": 855,
-                        "y": 460
+                        "y": 425
                     }
                 }
             ]
         }
     },
     {
-        "name": "Easy Peasy Planetoid Squeezy",
+        "name": "Easy Peasy",
         "entities": {
             "player": {
                 "startPosition": {
@@ -184,7 +184,7 @@
             "turrets": [
                 {
                     "type": "bullet",
-                    "firingSpeed": 3,
+                    "firingSpeed": 2,
                     "projectileSpeed": 6,
                     "startAngle": 2.60,
                     "tracksPlayer": false,
@@ -195,7 +195,7 @@
                 },
                 {
                     "type": "bullet",
-                    "firingSpeed": 3,
+                    "firingSpeed": 2,
                     "projectileSpeed": 6,
                     "startAngle": 5.85,
                     "tracksPlayer": false,
@@ -473,7 +473,7 @@
                     "firingSpeed": 2.75,
                     "projectileSpeed": 5,
                     "startAngle": 1.5,
-                    "tracksPlayer": false,
+                    "tracksPlayer": true,
                     "position": {
                         "x": 50,
                         "y": 100
@@ -484,7 +484,7 @@
                     "firingSpeed": 1.95,
                     "projectileSpeed": 2,
                     "startAngle": 1.5,
-                    "tracksPlayer": false,
+                    "tracksPlayer": true,
                     "position": {
                         "x": 250,
                         "y": 100
@@ -495,7 +495,7 @@
                     "firingSpeed": 2.1,
                     "projectileSpeed": 2,
                     "startAngle": 4.5,
-                    "tracksPlayer": false,
+                    "tracksPlayer": true,
                     "position": {
                         "x": 975,
                         "y": 100
@@ -506,7 +506,7 @@
                     "firingSpeed": 2.5,
                     "projectileSpeed": 5,
                     "startAngle": 4.5,
-                    "tracksPlayer": false,
+                    "tracksPlayer": true,
                     "position": {
                         "x": 1175,
                         "y": 100
@@ -708,8 +708,8 @@
                     "type": "moon",
                     "size": 2,
                     "position": {
-                        "x": 650,
-                        "y": 50
+                        "x": 585,
+                        "y": 150
                     }
                 }
             ],

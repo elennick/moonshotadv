@@ -78,8 +78,17 @@ function love.draw()
     player:draw()
     --world:draw()
 
-    local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
-    love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
+    if currentLevel == 1 then
+        love.graphics.print("--- SUPER MOONSHOT", love.graphics.getFont(), 725, 100, 0, 3, 3)
+        love.graphics.print("ADVENTURE ---", love.graphics.getFont(), 725, 140, 0, 3, 3)
+        --todo show control icons instead of just text
+        love.graphics.print("RIGHT ARROW - Move clockwise", 50, 600, 0, 1.5)
+        love.graphics.print("LEFT ARROW - Move counterclockwise", 50, 630, 0, 1.5)
+        love.graphics.print("UP ARROW - Jump", 50, 660, 0, 1.5)
+    else
+        local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
+        love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
+    end
 end
 
 function love.update(dt)
@@ -121,7 +130,7 @@ function love.update(dt)
     end
 
     lastJumped = lastJumped + dt
-    if love.keyboard.isDown("up") and lastJumped > jumpLimit then
+    if (love.keyboard.isDown("up") or love.keyboard.isDown("space")) and lastJumped > jumpLimit then
         --TODO make jump distance independent of planet size
         player:getBox():setLinearVelocity(-vectorXTowardClosestPlanet * 8, -vectorYTowardClosestPlanet * 8)
         lastJumped = 0
