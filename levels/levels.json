@@ -1,10 +1,10 @@
 [
     {
-        "name": "Easy Peasy!",
+        "name": "Title Screen!",
         "entities": {
             "player": {
                 "startPosition": {
-                    "x": 300,
+                    "x": 400,
                     "y": 200
                 }
             },
@@ -14,22 +14,22 @@
                     "size": 5,
                     "position": {
                         "x": 425,
-                        "y": 360
+                        "y": 460
                     }
                 },
                 {
                     "type": "moon",
                     "size": 5,
                     "position": {
-                        "x": 795,
-                        "y": 360
+                        "x": 855,
+                        "y": 460
                     }
                 }
             ]
         }
     },
     {
-        "name": "Still Mostly Peasy",
+        "name": "Easy Peasy Planetoid Squeezy",
         "entities": {
             "player": {
                 "startPosition": {

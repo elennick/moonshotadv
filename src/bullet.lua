@@ -18,9 +18,9 @@ end
 
 function Bullet:draw()
     love.graphics.setColor(1, 0, 0, 1)
-    love.graphics.circle('line', self.x, self.y, 3)
+    love.graphics.circle('line', self.x, self.y, 4)
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.circle('fill', self.x, self.y, 2)
+    love.graphics.circle('fill', self.x, self.y, 3)
 end
 
 function Bullet:update(dt)
