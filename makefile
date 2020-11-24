@@ -2,7 +2,7 @@ runlocal:
 		/Applications/love.app/Contents/MacOS/love .
 
 runweb: clean
-		love-js . build/ -t 'Super Moonshot Adventure' -c -m 100000000
+		love-js . build/ -t 'Super Moonshot Adventure' -c -m 200000000
 		python -m SimpleHTTPServer 8000
 
 clean:
