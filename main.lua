@@ -15,6 +15,7 @@ local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 local missileLifetime = 20
+local paused = false
 
 local currentLevelName = nil
 local currentLevel = 1
@@ -46,6 +47,9 @@ function love.load()
 
     background = Background:new()
     loadLevel(currentLevel)
+
+    jumpSound = love.audio.newSource("audio/jump.wav", "static")
+    jumpSound:setVolume(0.25)
 
     local music = love.audio.newSource("audio/music/manystars.ogg", 'static')
     music:setLooping(true)
@@ -82,16 +86,39 @@ function love.draw()
         love.graphics.print("--- SUPER MOONSHOT", love.graphics.getFont(), 725, 100, 0, 3, 3)
         love.graphics.print("ADVENTURE ---", love.graphics.getFont(), 725, 140, 0, 3, 3)
         --todo show control icons instead of just text
-        love.graphics.print("RIGHT ARROW - Move clockwise", 50, 600, 0, 1.5)
-        love.graphics.print("LEFT ARROW - Move counterclockwise", 50, 630, 0, 1.5)
-        love.graphics.print("UP ARROW - Jump", 50, 660, 0, 1.5)
+        love.graphics.print("RIGHT ARROW - Move clockwise", 50, 580, 0, 1.5)
+        love.graphics.print("LEFT ARROW - Move counterclockwise", 50, 610, 0, 1.5)
+        love.graphics.print("UP ARROW - Jump", 50, 640, 0, 1.5)
+        love.graphics.print("ESC - Pause/Quit", 50, 670, 0, 1.5)
     else
         local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
         love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
     end
+
+    --if the game is paused, show the pause menu over everything
+    if paused then
+        drawPausePopup()
+    end
+end
+
+function love.keypressed(key, scancode, isrepeat)
+    --if the game is already paused and someone presses Q then quit
+    if paused and key == "q" then
+        love.event.quit()
+    end
+
+    --if escape is pressed, toggle the pause state
+    if key == "escape" then
+        paused = not paused
+    end
 end
 
 function love.update(dt)
+    --if game is paused then don't update anything's state
+    if paused then
+        return
+    end
+
     --figure out what the closest planet is
     if table.getn(planets) > 0 then
         closestPlanet = planets[1]
@@ -125,14 +152,11 @@ function love.update(dt)
     end
 
     --handle input
-    if love.keyboard.isDown("escape") then
-        love.event.quit() --remove this before finalizing, create a real menu with an exit option
-    end
-
     lastJumped = lastJumped + dt
     if (love.keyboard.isDown("up") or love.keyboard.isDown("space")) and lastJumped > jumpLimit then
         --TODO make jump distance independent of planet size
-        player:getBox():setLinearVelocity(-vectorXTowardClosestPlanet * 8, -vectorYTowardClosestPlanet * 8)
+        jumpSound:clone():play()
+        player:getBox():setLinearVelocity(-vectorXTowardClosestPlanet * 10, -vectorYTowardClosestPlanet * 10)
         lastJumped = 0
     end
 
@@ -163,7 +187,7 @@ function love.update(dt)
 
     for i, bullet in ipairs(bullets) do
         if bullet:getBox():enter('Planet') or bullet:getTimeAlive() > bulletLifetime then
-            local explosion = Explosion:new(bullet:getX(), bullet:getY(), .5, 1)
+            local explosion = Explosion:new(bullet:getX(), bullet:getY(), .5, 1, false)
             table.insert(explosions, explosion)
             bullet:destroy(i)
         else
@@ -176,7 +200,7 @@ function love.update(dt)
                 or missile:getBox():enter('Bullet')
                 or missile:getBox():enter('Laser')
                 or missile:getTimeAlive() > missileLifetime then
-            local explosion = Explosion:new(missile:getX(), missile:getY(), 1, 2.5)
+            local explosion = Explosion:new(missile:getX(), missile:getY(), 1, 2.5, true)
             table.insert(explosions, explosion)
             missile:destroy(i)
         else
@@ -291,4 +315,15 @@ function loadLevel(level)
     end
 
     currentLevelName = levelToLoad.name
+end
+
+function drawPausePopup()
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.rectangle('fill', 540, 270, 200, 100, 5, 5)
+    love.graphics.setColor(0, 0, 0, 1)
+    love.graphics.rectangle('fill', 545, 275, 190, 90, 5, 5)
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.print("*** PAUSED ***", 570, 285, 0, 1.5)
+    love.graphics.print("ESC - Unpause", 572, 310, 0, 1.5)
+    love.graphics.print("Q - Quit", 608, 335, 0, 1.5)
 end

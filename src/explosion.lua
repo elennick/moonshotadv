@@ -4,7 +4,7 @@ local Entity = require 'src.entity'
 
 Explosion = class('Explosion', Entity)
 
-function Explosion:initialize(x, y, lifetime, size)
+function Explosion:initialize(x, y, lifetime, size, shouldMakeNoise)
     Entity.initialize(self, x, y)
 
     self.explSpriteSheet = love.graphics.newImage("image/explosion-animated.png")
@@ -14,6 +14,13 @@ function Explosion:initialize(x, y, lifetime, size)
     self.lifetime = lifetime
     self.size = size
     self.timeAlive = 0
+    self.shouldMakeNoise = shouldMakeNoise
+
+    if self.shouldMakeNoise then
+        self.explSound = love.audio.newSource("audio/explosion.mp3", "static"):clone()
+        self.explSound:setVolume(0.3)
+        self.explSound:play()
+    end
 end
 
 function Explosion:draw()
@@ -31,6 +38,13 @@ end
 
 function Explosion:getLifetime()
     return self.lifetime
+end
+
+function Explosion:destroy()
+    if self.shouldMakeNoise then
+        self.explSound:stop()
+        self.explSound:release()
+    end
 end
 
 return Explosion

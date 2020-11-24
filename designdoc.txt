@@ -37,7 +37,15 @@ misc todo
 * menu + menu music + title logo stuff
 * level start countdown thing
 * sound effects
+* bonus - level editor
+
+bugs
+* missile sounds keep playing into next level
+* you can jump/move during the initial fall onto a planet when a level starts
+
 
 level ideas
 * level where player has to bunker down behind walls
 * level where laser gates opening causes a barrage of fire to come through
+
+
