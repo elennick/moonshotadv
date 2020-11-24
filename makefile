@@ -1,9 +1,15 @@
-runlocal:
+local:
 		/Applications/love.app/Contents/MacOS/love .
 
-runweb: clean
-		love-js . build/ -t 'Super Moonshot Adventure' -c -m 200000000
-		python -m SimpleHTTPServer 8000
+web: web-build
+		open "http://localhost:8000"
+		pushd ~/Development/moonshotadv/build; python -m SimpleHTTPServer 8000
 
 clean:
-		rm -rf build/
+		rm -rf ~/Development/moonshotadv/build
+
+web-build: clean
+		love-js ~/Development/moonshotadv ~/Development/moonshotadv/build -t 'Super Moonshot Adventure' -c -m 200000000
+
+web-zip: clean web-build
+		zip -r build/moonshotadventure.zip build

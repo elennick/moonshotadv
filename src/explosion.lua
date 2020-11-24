@@ -40,11 +40,11 @@ function Explosion:getLifetime()
     return self.lifetime
 end
 
-function Explosion:destroy()
-    if self.shouldMakeNoise then
-        self.explSound:stop()
-        self.explSound:release()
-    end
-end
+--function Explosion:destroy()
+    --if self.shouldMakeNoise then
+        --self.explSound:stop()
+        --self.explSound:release()
+    --end
+--end
 
 return Explosion

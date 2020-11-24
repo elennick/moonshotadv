@@ -45,7 +45,12 @@ bugs
 
 
 level ideas
-* level where player has to bunker down behind walls
-* level where laser gates opening causes a barrage of fire to come through
+* level where guns/missiles fire off and on and player has to bunker down behind walls between volleys
+* level where laser gates opening causes a barrage of fire to come through (similar to above)
+* level where a certain type of planet kills you if you land on it, have to use gravity to jump around it
+* make gravity variable in different levels so that different types of jumps and orbits are possible
 
 
+make local - runs using locally installed LOVE2D
+make web - builds using love-js and then runs in a web browser
+make clean - deletes builds directory used for the web build

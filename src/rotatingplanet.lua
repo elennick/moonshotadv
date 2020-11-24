@@ -3,17 +3,20 @@ local Entity = require 'src.entity'
 
 RotatingPlanet = class('RotatingPlanet', Entity)
 
-RotatingPlanet.static.maxRotationSpeed = .03
+RotatingPlanet.static.maxRotationSpeed = 5
 
 function RotatingPlanet:initialize(args)
     Entity.initialize(self, args.x, args.y)
     self.size = args.size
-    self.rotationSpeed = math.random(-RotatingPlanet.maxRotationSpeed, RotatingPlanet.maxRotationSpeed)
+    self.rotationSpeed = love.math.random(-RotatingPlanet.maxRotationSpeed, RotatingPlanet.maxRotationSpeed) / 100
+    print("rotationSpeed = " .. self.rotationSpeed)
+    print("RotatingPlanet.static.maxRotationSpeed = " .. RotatingPlanet.maxRotationSpeed)
     self.rotation = love.math.random(359)
+    print("starting rotation = " .. self.rotation)
     self.type = args.type
 
     if self.rotationSpeed == nil then
-        self.rotationSpeed = math.random(-RotatingPlanet.maxRotationSpeed, RotatingPlanet.maxRotationSpeed)
+        self.rotationSpeed = love.math.random(-RotatingPlanet.maxRotationSpeed, RotatingPlanet.maxRotationSpeed)
     end
 
     if self.type == 'lava' then

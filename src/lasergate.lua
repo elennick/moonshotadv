@@ -59,7 +59,7 @@ function LaserGate:initialize(args)
 
     --load audio
     self.laserSound = love.audio.newSource("audio/laserbuzz.wav", "static"):clone()
-    self.laserSound:setVolume(0.2)
+    self.laserSound:setVolume(0.5)
 end
 
 function LaserGate:draw()

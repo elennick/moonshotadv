@@ -28,7 +28,7 @@ explosions = {}
 player = nil
 
 function love.load()
-    math.randomseed(os.time())
+    love.math.setRandomSeed(love.timer.getTime())
     local major, minor, revision, codename = love.getVersion()
     print("running with LÖVE version: " .. major .. "." .. minor .. "." .. revision .. " " .. codename)
 
@@ -89,7 +89,7 @@ function love.draw()
         love.graphics.print("RIGHT ARROW - Move clockwise", 50, 580, 0, 1.5)
         love.graphics.print("LEFT ARROW - Move counterclockwise", 50, 610, 0, 1.5)
         love.graphics.print("UP ARROW - Jump", 50, 640, 0, 1.5)
-        love.graphics.print("ESC - Pause/Quit", 50, 670, 0, 1.5)
+        love.graphics.print("ESC - Pause", 50, 670, 0, 1.5)
     else
         local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
         love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
@@ -103,9 +103,9 @@ end
 
 function love.keypressed(key, scancode, isrepeat)
     --if the game is already paused and someone presses Q then quit
-    if paused and key == "q" then
-        love.event.quit()
-    end
+    --if paused and key == "q" then
+    --    love.event.quit()
+    --end
 
     --if escape is pressed, toggle the pause state
     if key == "escape" then
@@ -156,7 +156,7 @@ function love.update(dt)
     if (love.keyboard.isDown("up") or love.keyboard.isDown("space")) and lastJumped > jumpLimit then
         --TODO make jump distance independent of planet size
         jumpSound:clone():play()
-        player:getBox():setLinearVelocity(-vectorXTowardClosestPlanet * 10, -vectorYTowardClosestPlanet * 10)
+        player:getBox():setLinearVelocity(-vectorXTowardClosestPlanet * 8, -vectorYTowardClosestPlanet * 8)
         lastJumped = 0
     end
 
@@ -325,5 +325,5 @@ function drawPausePopup()
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.print("*** PAUSED ***", 570, 285, 0, 1.5)
     love.graphics.print("ESC - Unpause", 572, 310, 0, 1.5)
-    love.graphics.print("Q - Quit", 608, 335, 0, 1.5)
+    --love.graphics.print("Q - Quit", 608, 335, 0, 1.5)
 end
