@@ -10,6 +10,7 @@ require 'src.missile'
 require 'src.explosion'
 require 'src.wall'
 require 'src.lasergate'
+require 'src.key'
 
 local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
@@ -21,11 +22,12 @@ local debug = false --make sure this is false for real deployment
 local currentLevelName = nil
 local currentLevel = 12
 local levels = nil
-local entities = {}
 local planets = {}
+entities = {}
 bullets = {}
 missiles = {}
 explosions = {}
+keys = {}
 player = nil
 
 function love.load()
@@ -45,6 +47,7 @@ function love.load()
     world:addCollisionClass('Player')
     world:addCollisionClass('Wall')
     world:addCollisionClass('Laser')
+    world:addCollisionClass('Key', { ignores = { 'Bullet', 'Missile' } })
 
     mainFont = love.graphics.newFont("image/font/Amuro.otf", 12)
     love.graphics.setFont(mainFont)
@@ -81,6 +84,10 @@ function love.draw()
         love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
     end
 
+    if player:getNumOfKeysInInventory() > 0 then
+        love.graphics.print("Keys: " .. player:getNumOfKeysInInventory(), 1150, 30, 0, 2, 2)
+    end
+
     for i in ipairs(entities) do
         love.graphics.setColor(1, 1, 1, 1)
         entities[i]:draw()
@@ -101,23 +108,24 @@ function love.draw()
         love.graphics.setColor(1, 1, 1, 1)
         explosions[i]:draw()
     end
+    for i in ipairs(keys) do
+        love.graphics.setColor(1, 1, 1, 1)
+        keys[i]:draw()
+    end
 
     player:draw()
     --world:draw()
 
-    --if the game is paused, show the pause menu over everything
     if paused then
         drawPausePopup()
     end
 end
 
 function love.keypressed(key, scancode, isrepeat)
-    --if the game is already paused and someone presses Q then quit
-    --if paused and key == "q" then
-    --    love.event.quit()
-    --end
+    if key == "r" and paused then
+        restartLevel()
+    end
 
-    --if escape is pressed, toggle the pause state
     if key == "escape" then
         paused = not paused
     end
@@ -191,6 +199,10 @@ function love.update(dt)
         entities[i]:update(dt)
     end
 
+    for i in ipairs(keys) do
+        keys[i]:update(dt)
+    end
+
     for i in ipairs(planets) do
         planets[i]:update(dt)
     end
@@ -258,6 +270,9 @@ function clearLevel()
     for i in ipairs(missiles) do
         missiles[i]:getBox():destroy()
     end
+    for i in ipairs(keys) do
+        keys[i]:getBox():destroy()
+    end
     if player ~= nil then
         player:destroy()
     end
@@ -267,11 +282,15 @@ function clearLevel()
     bullets = {}
     missiles = {}
     explosions = {}
+    keys = {}
     player = nil
 end
 
 function restartLevel()
     loadLevel(currentLevel)
+    if paused then
+        paused = not paused
+    end
 end
 
 function loadLevel(level)
@@ -324,6 +343,14 @@ function loadLevel(level)
         end
     end
 
+    local keysToLoad = levelToLoad.entities.keys
+    if keysToLoad ~= nil then
+        for i in ipairs(keysToLoad) do
+            table.insert(keys, Key:new({ x = keysToLoad[i].position.x,
+                                         y = keysToLoad[i].position.y }))
+        end
+    end
+
     currentLevelName = levelToLoad.name
 end
 
@@ -334,7 +361,6 @@ function drawPausePopup()
     love.graphics.rectangle('fill', 545, 275, 190, 90, 5, 5)
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.print("** PAUSED **", 564, 305, 0, 1.5)
-    --love.graphics.print("Q - Quit", 608, 335, 0, 1.5)
 end
 
 function loadAudio()
@@ -345,7 +371,7 @@ function loadAudio()
     explSound:setVolume(0.3)
 
     laserSound = love.audio.newSource("audio/laserbuzz.wav", "static")
-    laserSound:setVolume(0.5)
+    laserSound:setVolume(0.3)
 
     missileSound = love.audio.newSource("audio/missile.wav", "static")
     missileSound:setVolume(0.2)
@@ -353,8 +379,12 @@ function loadAudio()
     gunSound = love.audio.newSource("audio/gunshot.wav", "static")
     gunSound:setVolume(0.1)
 
+    keyPickupSound = love.audio.newSource("audio/keypickup.ogg", "static")
+    keyPickupSound:setVolume(1.0)
+
     local music = love.audio.newSource("audio/music/manystars.ogg", 'static')
     music:setLooping(true)
+    music:setVolume(1.3)
     music:play()
 
     if debug then

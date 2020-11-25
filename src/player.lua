@@ -10,6 +10,7 @@ function Player:initialize(x, y)
     self.w = 32
     self.h = 32
     self.rotation = 0
+    self.keysInInventory = 0
 
     playerIdleSpriteSheet = love.graphics.newImage("image/characters/elise_idle.png")
     playerIdleFrames = anim8.newGrid(32, 32, playerIdleSpriteSheet:getWidth(), playerIdleSpriteSheet:getHeight())
@@ -42,7 +43,6 @@ function Player:update(dt, playerRotationInRadians)
     self.y = self.collider:getY()
 
     self.rotation = playerRotationInRadians - 1.65
-    --print('rotation in radians ' .. self.rotation)
 end
 
 function Player:applyLinearImpulse(x, y)
@@ -57,4 +57,15 @@ function Player:destroy()
     self.collider:destroy()
 end
 
+function Player:addKeyToInventory()
+    self.keysInInventory = self.keysInInventory + 1
+end
+
+function Player:removeKeyFromInventory()
+    self.keysInInventory = self.keysInInventory - 1
+end
+
+function Player:getNumOfKeysInInventory()
+    return self.keysInInventory
+end
 return Player

@@ -1157,6 +1157,14 @@
                     "length": 50,
                     "switchRate": 1
                 }
+            ],
+            "keys": [
+                {
+                    "position": {
+                        "x": 500,
+                        "y": 400
+                    }
+                }
             ]
         }
     }
