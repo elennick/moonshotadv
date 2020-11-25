@@ -9,10 +9,7 @@ function RotatingPlanet:initialize(args)
     Entity.initialize(self, args.x, args.y)
     self.size = args.size
     self.rotationSpeed = love.math.random(-RotatingPlanet.maxRotationSpeed, RotatingPlanet.maxRotationSpeed) / 100
-    print("rotationSpeed = " .. self.rotationSpeed)
-    print("RotatingPlanet.static.maxRotationSpeed = " .. RotatingPlanet.maxRotationSpeed)
     self.rotation = love.math.random(359)
-    print("starting rotation = " .. self.rotation)
     self.type = args.type
 
     if self.rotationSpeed == nil then
@@ -29,6 +26,10 @@ function RotatingPlanet:initialize(args)
         self.image = love.graphics.newImage("image/planets/Terran.png")
     elseif self.type == 'mech' then
         self.image = love.graphics.newImage("image/planets/CO-MechPlanet.png")
+    elseif self.type == 'broken' then
+        self.image = love.graphics.newImage("image/planets/CO-BrokenPlanet.png")
+    elseif self.type == 'water' then
+        self.image = love.graphics.newImage("image/planets/CO-BluePlanet.png")
     end
 
     self.flagImage = love.graphics.newImage("image/flag.png")

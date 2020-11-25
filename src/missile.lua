@@ -23,6 +23,8 @@ function Missile:initialize(x, y, projectileSpeed)
 
     self.collider = world:newCircleCollider(x, y, 10)
     self.collider:setCollisionClass('Missile')
+
+    missileSound:clone():play()
 end
 
 function Missile:draw()

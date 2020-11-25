@@ -58,8 +58,7 @@ function LaserGate:initialize(args)
     end
 
     --load audio
-    self.laserSound = love.audio.newSource("audio/laserbuzz.wav", "static"):clone()
-    self.laserSound:setVolume(0.5)
+    self.clonedLaserSound = laserSound:clone()
 end
 
 function LaserGate:draw()
@@ -84,10 +83,10 @@ function LaserGate:update(dt)
         self.timeSinceLastChange = 0
         if self.gateIsOn then
             self.laserCollider:setActive(true)
-            self.laserSound:play()
+            self.clonedLaserSound:play()
         else
             self.laserCollider:setActive(false)
-            self.laserSound:stop()
+            self.clonedLaserSound:stop()
         end
     end
 
@@ -100,8 +99,9 @@ function LaserGate:destroy()
     self.topBlockCollider:destroy()
     self.bottomBlockCollider:destroy()
     self.laserCollider:destroy()
-    self.laserSound:stop()
-    self.laserSound:release()
+
+    self.clonedLaserSound:stop()
+    self.clonedLaserSound:release()
 end
 
 return LaserGate

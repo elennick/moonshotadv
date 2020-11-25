@@ -55,7 +55,7 @@
                     }
                 },
                 {
-                    "type": "lava",
+                    "type": "broken",
                     "size": 3,
                     "position": {
                         "x": 625,
@@ -116,7 +116,7 @@
                     }
                 },
                 {
-                    "type": "mech",
+                    "type": "water",
                     "size": 3,
                     "position": {
                         "x": 725,

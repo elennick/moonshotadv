@@ -17,9 +17,8 @@ function Explosion:initialize(x, y, lifetime, size, shouldMakeNoise)
     self.shouldMakeNoise = shouldMakeNoise
 
     if self.shouldMakeNoise then
-        self.explSound = love.audio.newSource("audio/explosion.mp3", "static"):clone()
-        self.explSound:setVolume(0.3)
-        self.explSound:play()
+        self.clonedExplSound = explSound:clone()
+        self.clonedExplSound:play()
     end
 end
 
@@ -40,11 +39,11 @@ function Explosion:getLifetime()
     return self.lifetime
 end
 
---function Explosion:destroy()
-    --if self.shouldMakeNoise then
-        --self.explSound:stop()
-        --self.explSound:release()
-    --end
---end
+function Explosion:destroy()
+    if self.shouldMakeNoise then
+        self.clonedExplSound:stop()
+        self.clonedExplSound:release()
+    end
+end
 
 return Explosion

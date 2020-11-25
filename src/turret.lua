@@ -13,12 +13,6 @@ function Turret:initialize(args)
     self.timeSinceLastShot = 0
 
     self.turretImage = love.graphics.newImage("image/ship_1.png")
-
-    self.missileSound = love.audio.newSource("audio/missile.wav", "static"):clone()
-    self.missileSound:setVolume(0.2)
-
-    self.gunSound = love.audio.newSource("audio/gunshot.wav", "static"):clone()
-    self.gunSound:setVolume(0.1)
 end
 
 function Turret:draw()
@@ -47,7 +41,7 @@ function Turret:fireBullet()
     local velx, vely = self:getVelocityOfNextProjectile()
     local bullet = Bullet:new(self.x - velx * 20, self.y - vely * 20)
     bullet:getBox():applyLinearImpulse(-velx * self.projectileSpeed, -vely * self.projectileSpeed)
-    self.gunSound:play()
+
     return bullet
 end
 
@@ -55,7 +49,7 @@ function Turret:fireMissile()
     local velx, vely = self:getVelocityOfNextProjectile()
     local missile = Missile:new(self.x - velx * 20, self.y - vely * 20, self.projectileSpeed)
     missile:getBox():applyLinearImpulse(-velx * self.projectileSpeed, -vely * self.projectileSpeed)
-    self.missileSound:play()
+
     return missile
 end
 

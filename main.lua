@@ -45,15 +45,9 @@ function love.load()
     world:addCollisionClass('Wall')
     world:addCollisionClass('Laser')
 
+    loadAudio()
     background = Background:new()
     loadLevel(currentLevel)
-
-    jumpSound = love.audio.newSource("audio/jump.wav", "static")
-    jumpSound:setVolume(0.25)
-
-    local music = love.audio.newSource("audio/music/manystars.ogg", 'static')
-    music:setLooping(true)
-    music:play()
 end
 
 function love.draw()
@@ -326,4 +320,25 @@ function drawPausePopup()
     love.graphics.print("*** PAUSED ***", 570, 285, 0, 1.5)
     love.graphics.print("ESC - Unpause", 572, 310, 0, 1.5)
     --love.graphics.print("Q - Quit", 608, 335, 0, 1.5)
+end
+
+function loadAudio()
+    jumpSound = love.audio.newSource("audio/jump.wav", "static")
+    jumpSound:setVolume(0.25)
+
+    explSound = love.audio.newSource("audio/explosion.mp3", "static")
+    explSound:setVolume(0.3)
+
+    laserSound = love.audio.newSource("audio/laserbuzz.wav", "static")
+    laserSound:setVolume(0.5)
+
+    missileSound = love.audio.newSource("audio/missile.wav", "static")
+    missileSound:setVolume(0.2)
+
+    gunSound = love.audio.newSource("audio/gunshot.wav", "static")
+    gunSound:setVolume(0.1)
+
+    local music = love.audio.newSource("audio/music/manystars.ogg", 'static')
+    music:setLooping(true)
+    music:play()
 end
