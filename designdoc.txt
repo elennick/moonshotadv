@@ -51,6 +51,10 @@ level ideas
 * make gravity variable in different levels so that different types of jumps and orbits are possible
 
 
-make local - runs using locally installed LOVE2D
-make web - builds using love-js and then runs in a web browser
+make local - runs using locally installed LOVE2D (should be 11.3 installed)
+make web-build - builds the web version of the game using love-js
+make web-zip - builds the web version of the game using love-js and then zips it up (to be uploaded to itch)
+make web - builds using love-js and then runs in chrome locally using a python webserver
 make clean - deletes builds directory used for the web build
+
+

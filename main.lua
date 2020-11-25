@@ -16,9 +16,10 @@ local jumpLimit = 0.5 --how often can the player jump... lower numbers are faste
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 local missileLifetime = 20
 local paused = false
+local debug = false --make sure this is false for real deployment
 
 local currentLevelName = nil
-local currentLevel = 1
+local currentLevel = 12
 local levels = nil
 local entities = {}
 local planets = {}
@@ -45,6 +46,16 @@ function love.load()
     world:addCollisionClass('Wall')
     world:addCollisionClass('Laser')
 
+    mainFont = love.graphics.newFont("image/font/Amuro.otf", 12)
+    love.graphics.setFont(mainFont)
+
+    titleImage = love.graphics.newImage("image/title.png")
+    woodenControlsImage = love.graphics.newImage("image/WoodenControls.png")
+    rightArrowQuad = love.graphics.newQuad(137, 0, 12, 15, woodenControlsImage:getWidth(), woodenControlsImage:getHeight())
+    leftArrowQuad = love.graphics.newQuad(120, 0, 12, 15, woodenControlsImage:getWidth(), woodenControlsImage:getHeight())
+    upArrowQuad = love.graphics.newQuad(150, 0, 15, 15, woodenControlsImage:getWidth(), woodenControlsImage:getHeight())
+    escQuad = love.graphics.newQuad(180, 60, 35, 16, woodenControlsImage:getWidth(), woodenControlsImage:getHeight())
+
     loadAudio()
     background = Background:new()
     loadLevel(currentLevel)
@@ -52,6 +63,24 @@ end
 
 function love.draw()
     background:draw()
+
+    love.graphics.setColor(1, 1, 1, 1)
+    if currentLevel == 1 then
+        love.graphics.draw(titleImage, 640, 150, 0, 1, 1, titleImage:getWidth() / 2, titleImage:getHeight() / 2)
+        love.graphics.draw(woodenControlsImage, rightArrowQuad, 50, 569, 0, 2, 2)
+        love.graphics.draw(woodenControlsImage, leftArrowQuad, 50, 599, 0, 2, 2)
+        love.graphics.draw(woodenControlsImage, upArrowQuad, 50, 629, 0, 2, 2)
+        love.graphics.draw(woodenControlsImage, escQuad, 45, 672, 0, 1, 1)
+        --todo show control icons instead of just text
+        love.graphics.print("     - Move clockwise", 50, 574, 0, 1.5)
+        love.graphics.print("     - Move counterclockwise", 50, 604, 0, 1.5)
+        love.graphics.print("     - Jump", 50, 637, 0, 1.5)
+        love.graphics.print("     - Pause", 50, 667, 0, 1.5)
+    else
+        local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
+        love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
+    end
+
     for i in ipairs(entities) do
         love.graphics.setColor(1, 1, 1, 1)
         entities[i]:draw()
@@ -75,19 +104,6 @@ function love.draw()
 
     player:draw()
     --world:draw()
-
-    if currentLevel == 1 then
-        love.graphics.print("--- SUPER MOONSHOT", love.graphics.getFont(), 725, 100, 0, 3, 3)
-        love.graphics.print("ADVENTURE ---", love.graphics.getFont(), 725, 140, 0, 3, 3)
-        --todo show control icons instead of just text
-        love.graphics.print("RIGHT ARROW - Move clockwise", 50, 580, 0, 1.5)
-        love.graphics.print("LEFT ARROW - Move counterclockwise", 50, 610, 0, 1.5)
-        love.graphics.print("UP ARROW - Jump", 50, 640, 0, 1.5)
-        love.graphics.print("ESC - Pause", 50, 670, 0, 1.5)
-    else
-        local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
-        love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
-    end
 
     --if the game is paused, show the pause menu over everything
     if paused then
@@ -317,8 +333,7 @@ function drawPausePopup()
     love.graphics.setColor(0, 0, 0, 1)
     love.graphics.rectangle('fill', 545, 275, 190, 90, 5, 5)
     love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.print("*** PAUSED ***", 570, 285, 0, 1.5)
-    love.graphics.print("ESC - Unpause", 572, 310, 0, 1.5)
+    love.graphics.print("** PAUSED **", 564, 305, 0, 1.5)
     --love.graphics.print("Q - Quit", 608, 335, 0, 1.5)
 end
 
@@ -341,4 +356,8 @@ function loadAudio()
     local music = love.audio.newSource("audio/music/manystars.ogg", 'static')
     music:setLooping(true)
     music:play()
+
+    if debug then
+        love.audio.setVolume(0)
+    end
 end
