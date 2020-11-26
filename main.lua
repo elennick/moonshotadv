@@ -21,7 +21,7 @@ local paused = false
 local debug = true --make sure this is false for real deployment
 
 local currentLevelName = nil
-local currentLevel = 12
+local currentLevel = 1
 local levels = nil
 local planets = {}
 entities = {}

@@ -29,7 +29,7 @@
         }
     },
     {
-        "name": "Easy Peasy",
+        "name": "Nymphaeaceae",
         "entities": {
             "player": {
                 "startPosition": {
@@ -82,7 +82,7 @@
         }
     },
     {
-        "name": "Beautiful Butterfly",
+        "name": "Walled Off",
         "entities": {
             "player": {
                 "startPosition": {
@@ -139,7 +139,7 @@
         }
     },
     {
-        "name": "Under Pressure",
+        "name": "They're Shooting At Us!",
         "entities": {
             "player": {
                 "startPosition": {
@@ -208,213 +208,7 @@
         }
     },
     {
-        "name": "The Lava Gauntlet",
-        "entities": {
-            "player": {
-                "startPosition": {
-                    "x": 25,
-                    "y": 350
-                }
-            },
-            "planets": [
-                {
-                    "type": "lava",
-                    "size": 3,
-                    "position": {
-                        "x": 175,
-                        "y": 350
-                    }
-                },
-                {
-                    "type": "lava",
-                    "size": 3,
-                    "position": {
-                        "x": 400,
-                        "y": 350
-                    }
-                },
-                {
-                    "type": "lava",
-                    "size": 3,
-                    "position": {
-                        "x": 625,
-                        "y": 350
-                    }
-                },
-                {
-                    "type": "lava",
-                    "size": 3,
-                    "position": {
-                        "x": 850,
-                        "y": 350
-                    }
-                },
-                {
-                    "type": "moon",
-                    "size": 4,
-                    "position": {
-                        "x": 1100,
-                        "y": 350
-                    }
-                }
-            ],
-            "turrets": [
-                {
-                    "type": "bullet",
-                    "firingSpeed": 5,
-                    "projectileSpeed": 6,
-                    "startAngle": 3.12,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 250,
-                        "y": 100
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 3,
-                    "projectileSpeed": 6,
-                    "startAngle": 3.12,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 350,
-                        "y": 100
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 5,
-                    "projectileSpeed": 6,
-                    "startAngle": 3.12,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 450,
-                        "y": 100
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 3,
-                    "projectileSpeed": 6,
-                    "startAngle": 3.12,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 550,
-                        "y": 100
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 5,
-                    "projectileSpeed": 6,
-                    "startAngle": 3.12,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 650,
-                        "y": 100
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 3,
-                    "projectileSpeed": 6,
-                    "startAngle": 3.12,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 750,
-                        "y": 100
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 5,
-                    "projectileSpeed": 6,
-                    "startAngle": 3.12,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 850,
-                        "y": 100
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 3,
-                    "projectileSpeed": 6,
-                    "startAngle": 0.0,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 300,
-                        "y": 600
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 5,
-                    "projectileSpeed": 6,
-                    "startAngle": 0.0,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 400,
-                        "y": 600
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 3,
-                    "projectileSpeed": 6,
-                    "startAngle": 0.0,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 500,
-                        "y": 600
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 5,
-                    "projectileSpeed": 6,
-                    "startAngle": 0.0,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 600,
-                        "y": 600
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 3,
-                    "projectileSpeed": 6,
-                    "startAngle": 0.0,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 700,
-                        "y": 600
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 3,
-                    "projectileSpeed": 6,
-                    "startAngle": 0.0,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 800,
-                        "y": 600
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 3,
-                    "projectileSpeed": 6,
-                    "startAngle": 0.0,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 900,
-                        "y": 600
-                    }
-                }
-            ]
-        }
+        "name": "It's Following You"
     },
     {
         "name": "Bombardment",
@@ -510,137 +304,6 @@
                     "position": {
                         "x": 1175,
                         "y": 100
-                    }
-                }
-            ]
-        }
-    },
-    {
-        "name": "Spiral Out",
-        "entities": {
-            "player": {
-                "startPosition": {
-                    "x": 640,
-                    "y": 250
-                }
-            },
-            "planets": [
-                {
-                    "type": "ice",
-                    "size": 3,
-                    "position": {
-                        "x": 640,
-                        "y": 300
-                    }
-                },
-                {
-                    "type": "mech",
-                    "size": 2,
-                    "position": {
-                        "x": 450,
-                        "y": 250
-                    }
-                },
-                {
-                    "type": "lava",
-                    "size": 2,
-                    "position": {
-                        "x": 350,
-                        "y": 400
-                    }
-                },
-                {
-                    "type": "earth",
-                    "size": 2,
-                    "position": {
-                        "x": 400,
-                        "y": 575
-                    }
-                },
-                {
-                    "type": "lava",
-                    "size": 2,
-                    "position": {
-                        "x": 600,
-                        "y": 625
-                    }
-                },
-                {
-                    "type": "ice",
-                    "size": 2,
-                    "position": {
-                        "x": 800,
-                        "y": 575
-                    }
-                },
-                {
-                    "type": "mech",
-                    "size": 2,
-                    "position": {
-                        "x": 950,
-                        "y": 450
-                    }
-                },
-                {
-                    "type": "earth",
-                    "size": 2,
-                    "position": {
-                        "x": 1000,
-                        "y": 275
-                    }
-                },
-                {
-                    "type": "moon",
-                    "size": 2,
-                    "position": {
-                        "x": 975,
-                        "y": 100
-                    }
-                }
-            ],
-            "turrets": [
-                {
-                    "type": "bullet",
-                    "firingSpeed": 2,
-                    "projectileSpeed": 10,
-                    "startAngle": 1.5,
-                    "tracksPlayer": true,
-                    "position": {
-                        "x": 40,
-                        "y": 40
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 1,
-                    "projectileSpeed": 20,
-                    "startAngle": 1.58,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 40,
-                        "y": 155
-                    }
-                },
-                {
-                    "type": "missile",
-                    "firingSpeed": 3,
-                    "projectileSpeed": 3,
-                    "startAngle": 1.5,
-                    "tracksPlayer": true,
-                    "position": {
-                        "x": 1240,
-                        "y": 40
-                    }
-                },
-                {
-                    "type": "missile",
-                    "firingSpeed": 3,
-                    "projectileSpeed": 3,
-                    "startAngle": 1.5,
-                    "tracksPlayer": true,
-                    "position": {
-                        "x": 1240,
-                        "y": 680
                     }
                 }
             ]
@@ -895,7 +558,7 @@
         }
     },
     {
-        "name": "A Little Harder Now",
+        "name": "Now There's Two Of Them!",
         "entities": {
             "player": {
                 "startPosition": {
@@ -1015,7 +678,7 @@
         }
     },
     {
-        "name": "Gate Gauntlet",
+        "name": "Lockout",
         "entities": {
             "player": {
                 "startPosition": {
@@ -1027,6 +690,346 @@
                 {},
                 {},
                 {}
+            ]
+        }
+    },
+    {
+        "name": "Spiral Out",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 640,
+                    "y": 250
+                }
+            },
+            "planets": [
+                {
+                    "type": "ice",
+                    "size": 3,
+                    "position": {
+                        "x": 640,
+                        "y": 300
+                    }
+                },
+                {
+                    "type": "mech",
+                    "size": 2,
+                    "position": {
+                        "x": 450,
+                        "y": 250
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 2,
+                    "position": {
+                        "x": 350,
+                        "y": 400
+                    }
+                },
+                {
+                    "type": "earth",
+                    "size": 2,
+                    "position": {
+                        "x": 400,
+                        "y": 575
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 2,
+                    "position": {
+                        "x": 600,
+                        "y": 625
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 2,
+                    "position": {
+                        "x": 800,
+                        "y": 575
+                    }
+                },
+                {
+                    "type": "mech",
+                    "size": 2,
+                    "position": {
+                        "x": 950,
+                        "y": 450
+                    }
+                },
+                {
+                    "type": "earth",
+                    "size": 2,
+                    "position": {
+                        "x": 1000,
+                        "y": 275
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 2,
+                    "position": {
+                        "x": 975,
+                        "y": 100
+                    }
+                }
+            ],
+            "turrets": [
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2,
+                    "projectileSpeed": 10,
+                    "startAngle": 1.5,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 40,
+                        "y": 40
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 1,
+                    "projectileSpeed": 20,
+                    "startAngle": 1.58,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 40,
+                        "y": 155
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 3,
+                    "startAngle": 1.5,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 1240,
+                        "y": 40
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 3,
+                    "startAngle": 1.5,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 1240,
+                        "y": 680
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "name": "The Lava Gauntlet",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 25,
+                    "y": 350
+                }
+            },
+            "planets": [
+                {
+                    "type": "lava",
+                    "size": 3,
+                    "position": {
+                        "x": 175,
+                        "y": 350
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 3,
+                    "position": {
+                        "x": 400,
+                        "y": 350
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 3,
+                    "position": {
+                        "x": 625,
+                        "y": 350
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 3,
+                    "position": {
+                        "x": 850,
+                        "y": 350
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 4,
+                    "position": {
+                        "x": 1100,
+                        "y": 350
+                    }
+                }
+            ],
+            "turrets": [
+                {
+                    "type": "bullet",
+                    "firingSpeed": 5,
+                    "projectileSpeed": 6,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 250,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 350,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 5,
+                    "projectileSpeed": 6,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 450,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 550,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 5,
+                    "projectileSpeed": 6,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 650,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 750,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 5,
+                    "projectileSpeed": 6,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 850,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 300,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 5,
+                    "projectileSpeed": 6,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 400,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 500,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 5,
+                    "projectileSpeed": 6,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 600,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 700,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 800,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 900,
+                        "y": 600
+                    }
+                }
             ]
         }
     },
