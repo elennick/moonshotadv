@@ -58,3 +58,9 @@ make web - builds using love-js and then runs in chrome locally using a python w
 make clean - deletes builds directory used for the web build
 
 
+
+levels
+1 - title screen - teaches controls and that you have to jump to the moon to beat the level
+2 - lily pads - teaches jumping across several planet to get to your destination
+3 - under pressure - teaches about turrets and bullets
+4 - 

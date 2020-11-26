@@ -11,13 +11,14 @@ require 'src.explosion'
 require 'src.wall'
 require 'src.lasergate'
 require 'src.key'
+require 'src.lockedgate'
 
 local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 local missileLifetime = 20
 local paused = false
-local debug = false --make sure this is false for real deployment
+local debug = true --make sure this is false for real deployment
 
 local currentLevelName = nil
 local currentLevel = 12
@@ -28,6 +29,7 @@ bullets = {}
 missiles = {}
 explosions = {}
 keys = {}
+lockedGates = {}
 player = nil
 
 function love.load()
@@ -35,8 +37,7 @@ function love.load()
     local major, minor, revision, codename = love.getVersion()
     print("running with LÖVE version: " .. major .. "." .. minor .. "." .. revision .. " " .. codename)
 
-    local levelsJson = readFile("./levels/levels.json")
-    levels = json.decode(levelsJson)
+    levels = json.decode(readFile("./levels/levels.json"))
 
     world = wf.newWorld(0, 0, true)
     world:setGravity(0, 0)
@@ -47,6 +48,7 @@ function love.load()
     world:addCollisionClass('Player')
     world:addCollisionClass('Wall')
     world:addCollisionClass('Laser')
+    world:addCollisionClass('LockedGate')
     world:addCollisionClass('Key', { ignores = { 'Bullet', 'Missile' } })
 
     mainFont = love.graphics.newFont("image/font/Amuro.otf", 12)
@@ -59,7 +61,7 @@ function love.load()
     upArrowQuad = love.graphics.newQuad(150, 0, 15, 15, woodenControlsImage:getWidth(), woodenControlsImage:getHeight())
     escQuad = love.graphics.newQuad(180, 60, 35, 16, woodenControlsImage:getWidth(), woodenControlsImage:getHeight())
 
-    loadAudio()
+    initAudio()
     background = Background:new()
     loadLevel(currentLevel)
 end
@@ -112,9 +114,15 @@ function love.draw()
         love.graphics.setColor(1, 1, 1, 1)
         keys[i]:draw()
     end
+    for i in ipairs(lockedGates) do
+        love.graphics.setColor(1, 1, 1, 1)
+        lockedGates[i]:draw()
+    end
 
     player:draw()
-    --world:draw()
+    if debug then
+        world:draw()
+    end
 
     if paused then
         drawPausePopup()
@@ -122,8 +130,16 @@ function love.draw()
 end
 
 function love.keypressed(key, scancode, isrepeat)
-    if key == "r" and paused then
+    if key == "r" and paused and debug then
         restartLevel()
+    end
+
+    if key == "q" and paused and debug then
+        love.event.quit()
+    end
+
+    if key == "v" and paused and debug then
+        love.audio.setVolume(0)
     end
 
     if key == "escape" then
@@ -203,6 +219,10 @@ function love.update(dt)
         keys[i]:update(dt)
     end
 
+    for i in ipairs(lockedGates) do
+        lockedGates[i]:update(dt)
+    end
+
     for i in ipairs(planets) do
         planets[i]:update(dt)
     end
@@ -273,6 +293,9 @@ function clearLevel()
     for i in ipairs(keys) do
         keys[i]:getBox():destroy()
     end
+    for i in ipairs(lockedGates) do
+        lockedGates[i]:getBox():destroy()
+    end
     if player ~= nil then
         player:destroy()
     end
@@ -283,13 +306,14 @@ function clearLevel()
     missiles = {}
     explosions = {}
     keys = {}
+    lockedGates = {}
     player = nil
 end
 
 function restartLevel()
     loadLevel(currentLevel)
     if paused then
-        paused = not paused
+        paused = false
     end
 end
 
@@ -351,6 +375,15 @@ function loadLevel(level)
         end
     end
 
+    local lockedGatesToLoad = levelToLoad.entities.lockedGates
+    if lockedGatesToLoad ~= nil then
+        for i in ipairs(lockedGatesToLoad) do
+            table.insert(lockedGates, LockedGate:new({ x = lockedGatesToLoad[i].position.x,
+                                                       y = lockedGatesToLoad[i].position.y,
+                                                       direction = lockedGatesToLoad[i].direction }))
+        end
+    end
+
     currentLevelName = levelToLoad.name
 end
 
@@ -363,7 +396,7 @@ function drawPausePopup()
     love.graphics.print("** PAUSED **", 564, 305, 0, 1.5)
 end
 
-function loadAudio()
+function initAudio()
     jumpSound = love.audio.newSource("audio/jump.wav", "static")
     jumpSound:setVolume(0.25)
 
@@ -382,12 +415,11 @@ function loadAudio()
     keyPickupSound = love.audio.newSource("audio/keypickup.ogg", "static")
     keyPickupSound:setVolume(1.0)
 
+    unlockSound = love.audio.newSource("audio/unlock.wav", "static")
+    unlockSound:setVolume(1.0)
+
     local music = love.audio.newSource("audio/music/manystars.ogg", 'static')
     music:setLooping(true)
     music:setVolume(1.3)
     music:play()
-
-    if debug then
-        love.audio.setVolume(0)
-    end
 end

@@ -1165,6 +1165,15 @@
                         "y": 400
                     }
                 }
+            ],
+            "lockedGates": [
+                {
+                    "position": {
+                        "x": 400,
+                        "y": 600
+                    },
+                    "direction": "vertical"
+                }
             ]
         }
     }
