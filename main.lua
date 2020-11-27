@@ -19,7 +19,7 @@ local bulletLifetime = 10 --how long a bullet lives before being destroyed (if i
 local missileLifetime = 20
 local paused = false
 
-local debug = true --make sure this is false for real deployment
+local debug = false --make sure this is false for real deployment
 local music = true --make sure this is true for real deployment
 
 local currentLevelName = nil
@@ -27,6 +27,7 @@ local currentLevel = 1
 local levels = nil
 local planets = {}
 local levelStartTime = nil
+local timeSinceLevelStart = 0
 entities = {}
 bullets = {}
 missiles = {}
@@ -102,13 +103,12 @@ function love.draw()
     end
 
     love.graphics.setColor(1, 1, 1, 1)
-    if currentLevel == 1 then
+    if currentLevel == 1 and not debug then
         love.graphics.draw(titleImage, 640, 150, 0, 1, 1, titleImage:getWidth() / 2, titleImage:getHeight() / 2)
         drawControls(50, 569)
     else
         local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
         love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
-        local timeSinceLevelStart = love.timer.getTime() - levelStartTime
         local timeString = string.format("Time: %.2f", timeSinceLevelStart)
         love.graphics.print(timeString, 25, 25, 0, 2, 2)
     end
@@ -155,6 +155,8 @@ function love.keypressed(key, scancode, isrepeat)
 end
 
 function love.update(dt)
+    timeSinceLevelStart = love.timer.getTime() - levelStartTime
+
     --if game is paused then don't update anything's state
     if paused then
         return
@@ -194,7 +196,7 @@ function love.update(dt)
 
     --handle input
     lastJumped = lastJumped + dt
-    if (love.keyboard.isDown("up") or love.keyboard.isDown("space")) and lastJumped > jumpLimit then
+    if (love.keyboard.isDown("up") or love.keyboard.isDown("space")) and lastJumped > jumpLimit and timeSinceLevelStart > .2 then
         --TODO make jump distance independent of planet size
         jumpSound:clone():play()
         player:getBox():setLinearVelocity(-vectorXTowardClosestPlanet * 8, -vectorYTowardClosestPlanet * 8)

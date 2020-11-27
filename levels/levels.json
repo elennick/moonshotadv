@@ -916,14 +916,98 @@
         "entities": {
             "player": {
                 "startPosition": {
-                    "x": 1000,
-                    "y": 25
+                    "x": 500,
+                    "y": 575
                 }
             },
             "planets": [
-                {},
-                {},
-                {}
+                {
+                    "type": "earth",
+                    "size": 3,
+                    "position": {
+                        "x": 640,
+                        "y": 575
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 3,
+                    "position": {
+                        "x": 640,
+                        "y": 350
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 3,
+                    "position": {
+                        "x": 840,
+                        "y": 350
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 3,
+                    "position": {
+                        "x": 1040,
+                        "y": 350
+                    }
+                },
+                {
+                    "type": "mech",
+                    "size": 3,
+                    "position": {
+                        "x": 350,
+                        "y": 350
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 3,
+                    "position": {
+                        "x": 150,
+                        "y": 350
+                    }
+                }
+            ],
+            "keys": [
+                {
+                    "position": {
+                        "x": 1125,
+                        "y": 320
+                    }
+                }
+            ],
+            "lockedGates": [
+                {
+                    "position": {
+                        "x": 500,
+                        "y": 310
+                    },
+                    "direction": "vertical"
+                }
+            ],
+            "walls": [
+                {
+                    "position": {
+                        "x": 484,
+                        "y": 250
+                    },
+                    "size": {
+                        "w": 16,
+                        "h": 60
+                    }
+                },
+                {
+                    "position": {
+                        "x": 484,
+                        "y": 390
+                    },
+                    "size": {
+                        "w": 16,
+                        "h": 60
+                    }
+                }
             ]
         }
     },
