@@ -67,10 +67,11 @@ levels
 4 - theyre shooting at us! - teaches about turrets and bullets
 5 - it's following you - teaches about turrets that track the player
 6 - bombardment - teaches about missile turrets
-7 - bullet command - teaches about the fact that bullets blow up missiles
-8 - fricken lasers - teaches about laser gates simply
-9 - now there's two of them - teaches about multiple laser gates on different timers and shows that bullets bounce off lasers that are turned on
-10 - lockout - teaches about locked gates and keys
+7 - bunkers - teaches you that walls block bullets and missiles
+8 - bullet command - teaches about the fact that bullets blow up missiles
+9 - fricken lasers - teaches about laser gates simply
+10 - now there's two of them - teaches about multiple laser gates on different timers and shows that bullets bounce off lasers that are turned on
+11 - lockout - teaches about locked gates and keys
 
 11 - hunker down - heavy bullet/missile bombardment blocked off by some walled off bunkers
 12 - long way around - guns/missiles in the center, have to jump around the entire edge of the screen to get to the moon

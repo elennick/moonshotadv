@@ -20,7 +20,7 @@ local missileLifetime = 20
 local paused = false
 
 local debug = true --make sure this is false for real deployment
-local music = false --make sure this is true for real deployment
+local music = true --make sure this is true for real deployment
 
 local currentLevelName = nil
 local currentLevel = 1
@@ -74,30 +74,6 @@ function love.draw()
     background:draw()
 
     love.graphics.setColor(1, 1, 1, 1)
-    if currentLevel == 1 then
-        love.graphics.draw(titleImage, 640, 150, 0, 1, 1, titleImage:getWidth() / 2, titleImage:getHeight() / 2)
-        love.graphics.draw(woodenControlsImage, rightArrowQuad, 50, 569, 0, 2, 2)
-        love.graphics.draw(woodenControlsImage, leftArrowQuad, 50, 599, 0, 2, 2)
-        love.graphics.draw(woodenControlsImage, upArrowQuad, 50, 629, 0, 2, 2)
-        love.graphics.draw(woodenControlsImage, escQuad, 45, 672, 0, 1, 1)
-        --todo show control icons instead of just text
-        love.graphics.print("     - Move clockwise", 50, 574, 0, 1.5)
-        love.graphics.print("     - Move counterclockwise", 50, 604, 0, 1.5)
-        love.graphics.print("     - Jump", 50, 637, 0, 1.5)
-        love.graphics.print("     - Pause", 50, 667, 0, 1.5)
-    else
-        local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
-        love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
-        local timeSinceLevelStart = love.timer.getTime() - levelStartTime
-        local timeString = string.format("Time: %.2f", timeSinceLevelStart)
-        love.graphics.print(timeString, 25, 25, 0, 2, 2)
-    end
-
-    if player:getNumOfKeysInInventory() > 0 then
-        love.graphics.print("Keys: " .. player:getNumOfKeysInInventory(), 1150, 30, 0, 2, 2)
-    end
-
-    love.graphics.setColor(1, 1, 1, 1)
     for i in ipairs(entities) do
         entities[i]:draw()
     end
@@ -125,6 +101,22 @@ function love.draw()
         world:draw()
     end
 
+    love.graphics.setColor(1, 1, 1, 1)
+    if currentLevel == 1 then
+        love.graphics.draw(titleImage, 640, 150, 0, 1, 1, titleImage:getWidth() / 2, titleImage:getHeight() / 2)
+        drawControls(50, 569)
+    else
+        local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
+        love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
+        local timeSinceLevelStart = love.timer.getTime() - levelStartTime
+        local timeString = string.format("Time: %.2f", timeSinceLevelStart)
+        love.graphics.print(timeString, 25, 25, 0, 2, 2)
+    end
+
+    if player:getNumOfKeysInInventory() > 0 then
+        love.graphics.print("Keys: " .. player:getNumOfKeysInInventory(), 1150, 30, 0, 2, 2)
+    end
+
     if paused then
         drawPausePopup()
     end
@@ -141,6 +133,20 @@ function love.keypressed(key, scancode, isrepeat)
 
     if key == "v" and paused and debug then
         love.audio.setVolume(0)
+    end
+
+    if key == "l" and paused and debug then
+        if pcall(function()
+            local textFromClipoboard = tostring(love.system.getClipboardText())
+            local jsonFromClipboard = json.decode(textFromClipoboard)
+            levels = jsonFromClipboard
+            clearLevel()
+            loadLevel(1)
+        end) then
+            print("loaded level from clipboard")
+        else
+            print("error loading level from clipboard")
+        end
     end
 
     if key == "escape" then
@@ -389,15 +395,6 @@ function loadLevel(level)
     levelStartTime = love.timer.getTime()
 end
 
-function drawPausePopup()
-    love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.rectangle('fill', 540, 270, 200, 100, 5, 5)
-    love.graphics.setColor(0, 0, 0, 1)
-    love.graphics.rectangle('fill', 545, 275, 190, 90, 5, 5)
-    love.graphics.setColor(1, 1, 1, 1)
-    love.graphics.print("** PAUSED **", 564, 305, 0, 1.5)
-end
-
 function initAudio()
     jumpSound = love.audio.newSource("audio/jump.wav", "static")
     jumpSound:setVolume(0.25)
@@ -427,4 +424,29 @@ function initAudio()
     if music then
         musicSound:play()
     end
+end
+
+function drawControls(x, y)
+    love.graphics.draw(woodenControlsImage, rightArrowQuad, x, y, 0, 2, 2)
+    love.graphics.draw(woodenControlsImage, leftArrowQuad, x, y + 30, 0, 2, 2)
+    love.graphics.draw(woodenControlsImage, upArrowQuad, x, y + 60, 0, 2, 2)
+    love.graphics.draw(woodenControlsImage, escQuad, x - 5, y + 103, 0, 1, 1)
+    love.graphics.print("     - Move clockwise", x, y + 5, 0, 1.5)
+    love.graphics.print("     - Move counterclockwise", x, y + 35, 0, 1.5)
+    love.graphics.print("     - Jump", x, y + 68, 0, 1.5)
+    love.graphics.print("     - Pause", x, y + 98, 0, 1.5)
+end
+
+function drawPausePopup()
+    local topLeftX = 440
+    local topLeftY = 260
+    local width = 375
+    local height = 240
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.rectangle('fill', topLeftX, topLeftY, width, height, 5, 5)
+    love.graphics.setColor(0, 0, 0, 1)
+    love.graphics.rectangle('fill', topLeftX + 5, topLeftY + 5, width - 10, height - 10, 5, 5)
+    love.graphics.setColor(1, 1, 1, 1)
+    love.graphics.print("PAUSED", topLeftX + 142, topLeftY + 30, 0, 1.5)
+    drawControls(topLeftX + 30, topLeftY + 80)
 end
