@@ -18,12 +18,15 @@ local jumpLimit = 0.5 --how often can the player jump... lower numbers are faste
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 local missileLifetime = 20
 local paused = false
+
 local debug = true --make sure this is false for real deployment
+local music = false --make sure this is true for real deployment
 
 local currentLevelName = nil
 local currentLevel = 1
 local levels = nil
 local planets = {}
+local levelStartTime = nil
 entities = {}
 bullets = {}
 missiles = {}
@@ -49,6 +52,7 @@ function love.load()
     world:addCollisionClass('Wall')
     world:addCollisionClass('Laser')
     world:addCollisionClass('LockedGate')
+    world:addCollisionClass('Meteor', { ignores = { 'All' } })
     world:addCollisionClass('Key', { ignores = { 'Bullet', 'Missile' } })
 
     mainFont = love.graphics.newFont("image/font/Amuro.otf", 12)
@@ -84,38 +88,35 @@ function love.draw()
     else
         local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
         love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
+        local timeSinceLevelStart = love.timer.getTime() - levelStartTime
+        local timeString = string.format("Time: %.2f", timeSinceLevelStart)
+        love.graphics.print(timeString, 25, 25, 0, 2, 2)
     end
 
     if player:getNumOfKeysInInventory() > 0 then
         love.graphics.print("Keys: " .. player:getNumOfKeysInInventory(), 1150, 30, 0, 2, 2)
     end
 
+    love.graphics.setColor(1, 1, 1, 1)
     for i in ipairs(entities) do
-        love.graphics.setColor(1, 1, 1, 1)
         entities[i]:draw()
     end
     for i in ipairs(planets) do
-        love.graphics.setColor(1, 1, 1, 1)
         planets[i]:draw()
     end
     for i in ipairs(bullets) do
-        love.graphics.setColor(1, 1, 1, 1)
         bullets[i]:draw()
     end
     for i in ipairs(missiles) do
-        love.graphics.setColor(1, 1, 1, 1)
         missiles[i]:draw()
     end
     for i in ipairs(explosions) do
-        love.graphics.setColor(1, 1, 1, 1)
         explosions[i]:draw()
     end
     for i in ipairs(keys) do
-        love.graphics.setColor(1, 1, 1, 1)
         keys[i]:draw()
     end
     for i in ipairs(lockedGates) do
-        love.graphics.setColor(1, 1, 1, 1)
         lockedGates[i]:draw()
     end
 
@@ -385,6 +386,7 @@ function loadLevel(level)
     end
 
     currentLevelName = levelToLoad.name
+    levelStartTime = love.timer.getTime()
 end
 
 function drawPausePopup()
@@ -418,8 +420,11 @@ function initAudio()
     unlockSound = love.audio.newSource("audio/unlock.wav", "static")
     unlockSound:setVolume(1.0)
 
-    local music = love.audio.newSource("audio/music/manystars.ogg", 'static')
-    music:setLooping(true)
-    music:setVolume(1.3)
-    music:play()
+    local musicSound = love.audio.newSource("audio/music/manystars.ogg", 'static')
+    musicSound:setLooping(true)
+    musicSound:setVolume(1.3)
+
+    if music then
+        musicSound:play()
+    end
 end
