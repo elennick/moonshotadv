@@ -91,6 +91,7 @@ function LaserGate:update(dt)
     end
 
     if self.laserCollider:isActive() and self.laserCollider:enter('Player') then
+        deathSound:clone():play()
         restartLevel()
     end
 end

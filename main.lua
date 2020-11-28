@@ -192,6 +192,7 @@ function love.update(dt)
     end
 
     if player:getBox():enter('Bullet') or player:getBox():enter('Missile') then
+        deathSound:clone():play()
         restartLevel()
     end
 
@@ -422,6 +423,9 @@ function initAudio()
 
     successSound = love.audio.newSource("audio/success.wav", "static")
     successSound:setVolume(1.0)
+
+    deathSound = love.audio.newSource("audio/death.wav", "static")
+    deathSound:setVolume(1.0)
 
     local musicSound = love.audio.newSource("audio/music/manystars.ogg", 'static')
     musicSound:setLooping(true)
