@@ -5,12 +5,11 @@ require 'src.meteor'
 
 Background = class('Background')
 
-local meteorsEnabled = false
-
 function Background:initialize()
     self.spriteSheet = love.graphics.newImage("image/background.png")
     self.frames = anim8.newGrid(320, 320, self.spriteSheet:getWidth(), self.spriteSheet:getHeight())
     self.animation = anim8.newAnimation(self.frames('1-4', 1), 0.5)
+    self.meteorsEnabled = false
 
     self.meteors = {}
 end
@@ -39,8 +38,8 @@ end
 function Background:update(dt)
     self.animation:update(dt)
 
-    if meteorsEnabled then
-        if (love.math.random(1, 1000) == 1) then
+    if self.meteorsEnabled then
+        if (love.math.random(1, 100) == 1) then
             print('generate meteor')
             table.insert(self.meteors, Meteor:new())
         end
@@ -53,6 +52,10 @@ function Background:update(dt)
             table.remove(self.meteors, i)
         end
     end
+end
+
+function Background:setMeteorsEnabled(enabled)
+    self.meteorsEnabled = enabled
 end
 
 return Background

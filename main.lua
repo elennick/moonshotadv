@@ -106,6 +106,10 @@ function love.draw()
     if currentLevel == 1 and not debug then
         love.graphics.draw(titleImage, 640, 150, 0, 1, 1, titleImage:getWidth() / 2, titleImage:getHeight() / 2)
         drawControls(50, 569)
+    elseif isLastLevel() then
+        love.graphics.draw(titleImage, 640, 150, 0, 1, 1, titleImage:getWidth() / 2, titleImage:getHeight() / 2)
+        love.graphics.print("YOU GOT TO THE MOON!!!", love.graphics.getFont(), 25, 675, 0, 2, 2)
+        love.graphics.print("Thanks for playing!", love.graphics.getFont(), 975, 675, 0, 2, 2)
     else
         local levelText = "Level " .. currentLevel .. " - " .. currentLevelName
         love.graphics.print(levelText, love.graphics.getFont(), 25, 675, 0, 2, 2)
@@ -183,7 +187,7 @@ function love.update(dt)
     else
         player:getBox():setLinearVelocity(0, 0)
         player:getBox():setAngularVelocity(0)
-        if closestPlanet:getType() == 'moon' then
+        if closestPlanet:getType() == 'moon' and not isLastLevel() then
             successSound:clone():play()
             currentLevel = currentLevel + 1
             loadLevel(currentLevel)
@@ -397,6 +401,9 @@ function loadLevel(level)
 
     currentLevelName = levelToLoad.name
     levelStartTime = love.timer.getTime()
+    if isLastLevel() then
+        background:setMeteorsEnabled(true)
+    end
 end
 
 function initAudio()
@@ -459,4 +466,8 @@ function drawPausePopup()
     love.graphics.setColor(1, 1, 1, 1)
     love.graphics.print("PAUSED", topLeftX + 142, topLeftY + 30, 0, 1.5)
     drawControls(topLeftX + 30, topLeftY + 80)
+end
+
+function isLastLevel()
+    return table.getn(levels) == currentLevel
 end

@@ -1828,6 +1828,23 @@
     },
     {
         "name": "You Win!",
-        "entities": []
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 640,
+                    "y": 250
+                }
+            },
+            "planets": [
+                {
+                    "type": "moon",
+                    "size": 6,
+                    "position": {
+                        "x": 640,
+                        "y": 450
+                    }
+                }
+            ]
+        }
     }
 ]
