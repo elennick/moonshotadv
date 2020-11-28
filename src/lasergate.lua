@@ -52,7 +52,7 @@ function LaserGate:initialize(args)
 
     --set rotation
     if self.direction == 'horizontal' then
-        self.rotation = 1.58
+        self.rotation = 1.57
     else
         self.rotation = 0
     end

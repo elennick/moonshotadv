@@ -1626,5 +1626,208 @@
                 }
             ]
         }
+    },
+    {
+        "name": "Tic Tac ZAPPPPP",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 50,
+                    "y": 360
+                }
+            },
+            "planets": [
+                {
+                    "type": "earth",
+                    "size": 3,
+                    "position": {
+                        "x": 225,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "water",
+                    "size": 3,
+                    "position": {
+                        "x": 500,
+                        "y": 120
+                    }
+                },
+                {
+                    "type": "water",
+                    "size": 3,
+                    "position": {
+                        "x": 500,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "water",
+                    "size": 3,
+                    "position": {
+                        "x": 500,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "water",
+                    "size": 3,
+                    "position": {
+                        "x": 750,
+                        "y": 120
+                    }
+                },
+                {
+                    "type": "water",
+                    "size": 3,
+                    "position": {
+                        "x": 750,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "water",
+                    "size": 3,
+                    "position": {
+                        "x": 750,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "water",
+                    "size": 3,
+                    "position": {
+                        "x": 1000,
+                        "y": 120
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 3,
+                    "position": {
+                        "x": 1000,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "water",
+                    "size": 3,
+                    "position": {
+                        "x": 1000,
+                        "y": 600
+                    }
+                }
+            ],
+            "laserGates": [
+                {
+                    "position": {
+                        "x": 620,
+                        "y": 50
+                    },
+                    "direction": "vertical",
+                    "length": 600,
+                    "switchRate": 1.5
+                },
+                {
+                    "position": {
+                        "x": 870,
+                        "y": 50
+                    },
+                    "direction": "vertical",
+                    "length": 180,
+                    "switchRate": 1.75
+                },
+                {
+                    "position": {
+                        "x": 870,
+                        "y": 470
+                    },
+                    "direction": "vertical",
+                    "length": 180,
+                    "switchRate": 1.75
+                },
+                {
+                    "position": {
+                        "x": 886,
+                        "y": 230
+                    },
+                    "direction": "horizontal",
+                    "length": 486,
+                    "switchRate": 1.25
+                },
+                {
+                    "position": {
+                        "x": 886,
+                        "y": 470
+                    },
+                    "direction": "horizontal",
+                    "length": 486,
+                    "switchRate": 2
+                }
+            ],
+            "keys": [
+                {
+                    "position": {
+                        "x": 1075,
+                        "y": 40
+                    }
+                }
+            ],
+            "lockedGates": [
+                {
+                    "position": {
+                        "x": 960,
+                        "y": 470
+                    },
+                    "direction": "horizontal"
+                }
+            ],
+            "walls": [
+                {
+                    "position": {
+                        "x": 886,
+                        "y": 470
+                    },
+                    "size": {
+                        "w": 74,
+                        "h": 16
+                    }
+                },
+                {
+                    "position": {
+                        "x": 1040,
+                        "y": 470
+                    },
+                    "size": {
+                        "w": 70,
+                        "h": 16
+                    }
+                },
+                {
+                    "position": {
+                        "x": 870,
+                        "y": 230
+                    },
+                    "size": {
+                        "w": 16,
+                        "h": 240
+                    }
+                },
+                {
+                    "position": {
+                        "x": 870,
+                        "y": 230
+                    },
+                    "size": {
+                        "w": 240,
+                        "h": 16
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "name": "You Win!",
+        "entities": []
     }
 ]
