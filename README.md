@@ -27,7 +27,7 @@ There are debug commands available if you build with the `debug` option enabled.
 While this option is enabled, you can press ESCAPE to bring up the pause menu and press the following keys to toggle debug actions:
 * V - sets the volume to 0
 * R - restarts the current level
-* Q - calls love.event.quit() and stops the game
+* Q - calls `love.event.quit()` and stops the game
 * L - tries to load levels JSON from the system clipboard
 
 ## Building Levels

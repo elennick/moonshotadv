@@ -1481,5 +1481,150 @@
                 }
             ]
         }
+    },
+    {
+        "name": "Tight Spaces",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 100,
+                    "y": 360
+                }
+            },
+            "planets": [
+                {
+                    "type": "broken",
+                    "size": 3,
+                    "position": {
+                        "x": 200,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "water",
+                    "size": 3,
+                    "position": {
+                        "x": 410,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 3,
+                    "position": {
+                        "x": 620,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "mech",
+                    "size": 3,
+                    "position": {
+                        "x": 830,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "earth",
+                    "size": 3,
+                    "position": {
+                        "x": 1100,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 2,
+                    "position": {
+                        "x": 120,
+                        "y": 100
+                    }
+                }
+            ],
+            "keys": [
+                {
+                    "position": {
+                        "x": 1200,
+                        "y": 325
+                    }
+                }
+            ],
+            "lockedGates": [
+                {
+                    "position": {
+                        "x": 115,
+                        "y": 192
+                    },
+                    "direction": "horizontal"
+                }
+            ],
+            "walls": [
+                {
+                    "position": {
+                        "x": 196,
+                        "y": 190
+                    },
+                    "size": {
+                        "w": 1064,
+                        "h": 20
+                    }
+                },
+                {
+                    "position": {
+                        "x": 0,
+                        "y": 190
+                    },
+                    "size": {
+                        "w": 114,
+                        "h": 20
+                    }
+                },
+                {
+                    "position": {
+                        "x": 260,
+                        "y": 510
+                    },
+                    "size": {
+                        "w": 1000,
+                        "h": 20
+                    }
+                }
+            ],
+            "turrets": [
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 15,
+                    "startAngle": 4.71,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 1225,
+                        "y": 260
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 15,
+                    "startAngle": 4.71,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 1225,
+                        "y": 460
+                    }
+                }
+            ],
+            "laserGates": [
+                {
+                    "position": {
+                        "x": 950,
+                        "y": 194
+                    },
+                    "direction": "vertical",
+                    "length": 316,
+                    "switchRate": 1.5
+                }
+            ]
+        }
     }
 ]
