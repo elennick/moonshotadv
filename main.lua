@@ -184,6 +184,7 @@ function love.update(dt)
         player:getBox():setLinearVelocity(0, 0)
         player:getBox():setAngularVelocity(0)
         if closestPlanet:getType() == 'moon' then
+            successSound:clone():play()
             currentLevel = currentLevel + 1
             loadLevel(currentLevel)
             return
@@ -418,6 +419,9 @@ function initAudio()
 
     unlockSound = love.audio.newSource("audio/unlock.wav", "static")
     unlockSound:setVolume(1.0)
+
+    successSound = love.audio.newSource("audio/success.wav", "static")
+    successSound:setVolume(1.0)
 
     local musicSound = love.audio.newSource("audio/music/manystars.ogg", 'static')
     musicSound:setLooping(true)

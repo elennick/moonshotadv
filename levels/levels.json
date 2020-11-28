@@ -1352,148 +1352,132 @@
         }
     },
     {
-        "name": "Sandbox",
+        "name": "Earth's Only Natural Satellite",
         "entities": {
             "player": {
                 "startPosition": {
-                    "x": 1000,
-                    "y": 25
+                    "x": 750,
+                    "y": 360
                 }
             },
             "planets": [
                 {
-                    "type": "lava",
-                    "size": 4,
+                    "type": "earth",
+                    "size": 10,
                     "position": {
-                        "x": 700,
-                        "y": 375
-                    }
-                },
-                {
-                    "type": "ice",
-                    "size": 3,
-                    "position": {
-                        "x": 550,
-                        "y": 600
+                        "x": 500,
+                        "y": 360
                     }
                 },
                 {
                     "type": "moon",
-                    "size": 4,
-                    "position": {
-                        "x": 300,
-                        "y": 425
-                    }
-                },
-                {
-                    "type": "earth",
                     "size": 3,
                     "position": {
-                        "x": 450,
-                        "y": 200
+                        "x": 1050,
+                        "y": 360
                     }
-                },
-                {
-                    "type": "mech",
-                    "size": 4,
-                    "position": {
-                        "x": 850,
-                        "y": 150
-                    }
-                }
-            ],
-            "turrets": [
-                {
-                    "type": "bullet",
-                    "firingSpeed": 2,
-                    "projectileSpeed": 5,
-                    "startAngle": 1.5,
-                    "tracksPlayer": true,
-                    "position": {
-                        "x": 50,
-                        "y": 50
-                    }
-                },
-                {
-                    "type": "bullet",
-                    "firingSpeed": 1,
-                    "projectileSpeed": 10,
-                    "startAngle": -1,
-                    "tracksPlayer": false,
-                    "position": {
-                        "x": 1200,
-                        "y": 650
-                    }
-                },
-                {
-                    "type": "missile",
-                    "firingSpeed": 4,
-                    "projectileSpeed": 2,
-                    "startAngle": -1,
-                    "tracksPlayer": true,
-                    "position": {
-                        "x": 1200,
-                        "y": 300
-                    }
-                }
-            ],
-            "walls": [
-                {
-                    "position": {
-                        "x": 150,
-                        "y": 100
-                    },
-                    "size": {
-                        "w": 20,
-                        "h": 100
-                    }
-                },
-                {
-                    "position": {
-                        "x": 1000,
-                        "y": 600
-                    },
-                    "size": {
-                        "w": 10,
-                        "h": 150
-                    }
-                }
-            ],
-            "laserGates": [
-                {
-                    "position": {
-                        "x": 1100,
-                        "y": 50
-                    },
-                    "direction": "vertical",
-                    "length": 600,
-                    "switchRate": 3
-                },
-                {
-                    "position": {
-                        "x": 500,
-                        "y": 350
-                    },
-                    "direction": "horizontal",
-                    "length": 50,
-                    "switchRate": 1
                 }
             ],
             "keys": [
                 {
                     "position": {
-                        "x": 500,
-                        "y": 400
+                        "x": 650,
+                        "y": 550
                     }
                 }
             ],
             "lockedGates": [
                 {
                     "position": {
-                        "x": 400,
-                        "y": 600
+                        "x": 900,
+                        "y": 310
                     },
                     "direction": "vertical"
+                }
+            ],
+            "walls": [
+                {
+                    "position": {
+                        "x": 550,
+                        "y": 500
+                    },
+                    "size": {
+                        "w": 350,
+                        "h": 20
+                    }
+                },
+                {
+                    "position": {
+                        "x": 884,
+                        "y": 0
+                    },
+                    "size": {
+                        "w": 16,
+                        "h": 310
+                    }
+                },
+                {
+                    "position": {
+                        "x": 884,
+                        "y": 390
+                    },
+                    "size": {
+                        "w": 16,
+                        "h": 125
+                    }
+                }
+            ],
+            "laserGates": [
+                {
+                    "position": {
+                        "x": 500,
+                        "y": 40
+                    },
+                    "direction": "vertical",
+                    "length": 100,
+                    "switchRate": 1
+                },
+                {
+                    "position": {
+                        "x": 300,
+                        "y": 360
+                    },
+                    "direction": "horizontal",
+                    "length": 100,
+                    "switchRate": 1
+                },
+                {
+                    "position": {
+                        "x": 500,
+                        "y": 550
+                    },
+                    "direction": "vertical",
+                    "length": 100,
+                    "switchRate": 1
+                }
+            ],
+            "turrets": [
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2,
+                    "projectileSpeed": 10,
+                    "startAngle": 1.5,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 75,
+                        "y": 75
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2,
+                    "projectileSpeed": 10,
+                    "startAngle": 1.5,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 75,
+                        "y": 650
+                    }
                 }
             ]
         }
