@@ -1,5 +1,6 @@
 local wf = require 'libs.windfield'
 local json = require 'libs.json'
+local cpml = require 'libs.cpml'
 
 require 'src.player'
 require 'src.rotatingplanet'
@@ -181,9 +182,13 @@ function love.update(dt)
     vectorXTowardClosestPlanet = closestPlanet:getX() - player:getX();
     vectorYTowardClosestPlanet = closestPlanet:getY() - player:getY();
 
+    local vectorTowardsClosestPlanet = cpml.vec2(vectorXTowardClosestPlanet, vectorYTowardClosestPlanet)
+    local normalizedVectorTowardsClosestPlanet = cpml.vec2.normalize(vectorTowardsClosestPlanet)
+    print('vector - ' .. normalizedVectorTowardsClosestPlanet.x .. ',' .. normalizedVectorTowardsClosestPlanet.y)
+
     --apply gravity towards the closest planet
     if not player:getBox():enter('Planet') then
-        player:applyLinearImpulse(vectorXTowardClosestPlanet, vectorYTowardClosestPlanet)
+        player:applyLinearImpulse(normalizedVectorTowardsClosestPlanet.x * 100, normalizedVectorTowardsClosestPlanet.y * 100)
     else
         player:getBox():setLinearVelocity(0, 0)
         player:getBox():setAngularVelocity(0)
@@ -205,7 +210,7 @@ function love.update(dt)
     if (love.keyboard.isDown("up") or love.keyboard.isDown("space")) and lastJumped > jumpLimit and timeSinceLevelStart > .2 then
         --TODO make jump distance independent of planet size
         jumpSound:clone():play()
-        player:getBox():setLinearVelocity(-vectorXTowardClosestPlanet * 8, -vectorYTowardClosestPlanet * 8)
+        player:getBox():setLinearVelocity(-normalizedVectorTowardsClosestPlanet.x * 700, -normalizedVectorTowardsClosestPlanet.y * 700)
         lastJumped = 0
     end
 

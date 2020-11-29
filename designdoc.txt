@@ -1,80 +1,10 @@
-game entites:
 
-player
-* player character that attempts to get from the beginning of the level to the moon at the end
+last todo
+* create release executables so game can be run in windows/mac and not just web
+* improve missile physics
+* add more levels
+* fix timer so it pauses when the pause screen is up
+* make sound stop when levels change
+* see if size of web version can be reduced
+* figure out why chrome in win10 physics dont work
 
-obstacles (block movement or affect movement but dont kill)
-* planets and planetoids that the player can jump between
-** some may be static but some are not static and move/orbit/rotate
-* walls or other barriers
-
-dangers
-* turrets firing seeking missiles
-* turrets firing bullets
-* static barriers (doesnt kill but blocks movement and bullets)
-* moving barriers (doesnt kill but blocks movement and bullets)
-* laser barriers that turn off and on (do kill)
-
-
-
-
-game systems required:
-* physics system where planetoids and other components have gravity and can collide
-* level defining and loading system so there can be many levels with different paths to the goal
-* components that can be laid out level both as obstacles and dangers
-
-game screens required:
-* title screen - can be simple and just have a title and describe controls
-* gameplay screen - loads levels and lets the player play them
-
-
-
-misc todo
-* timer to track how long it takes to beat a level, potentially tracking high scores / fastest times
-* death animation
-* flag on moon
-* fix missile homing
-* menu + menu music + title logo stuff
-* level start countdown thing
-* sound effects
-* bonus - level editor
-
-bugs
-* missile sounds keep playing into next level
-* you can jump/move during the initial fall onto a planet when a level starts
-
-
-level ideas
-* level where guns/missiles fire off and on and player has to bunker down behind walls between volleys
-* level where laser gates opening causes a barrage of fire to come through (similar to above)
-* level where a certain type of planet kills you if you land on it, have to use gravity to jump around it
-* make gravity variable in different levels so that different types of jumps and orbits are possible
-
-
-make local - runs using locally installed LOVE2D (should be 11.3 installed)
-make web-build - builds the web version of the game using love-js
-make web-zip - builds the web version of the game using love-js and then zips it up (to be uploaded to itch)
-make web - builds using love-js and then runs in chrome locally using a python webserver
-make clean - deletes builds directory used for the web build
-
-
-
-levels
-
-1 - title screen - teaches controls and that you have to jump to the moon to beat the level
-2 - lily pads - teaches jumping across several planet to get to your destination
-3 - walled off - teaches about walls blocking jumps
-4 - theyre shooting at us! - teaches about turrets and bullets
-5 - it's following you - teaches about turrets that track the player
-6 - bombardment - teaches about missile turrets
-7 - bunkers - teaches you that walls block bullets and missiles
-8 - bullet command - teaches about the fact that bullets blow up missiles
-9 - fricken lasers - teaches about laser gates simply
-10 - now there's two of them - teaches about multiple laser gates on different timers and shows that bullets bounce off lasers that are turned on
-11 - lockout - teaches about locked gates and keys
-
-11 - hunker down - heavy bullet/missile bombardment blocked off by some walled off bunkers
-12 - long way around - guns/missiles in the center, have to jump around the entire edge of the screen to get to the moon
-13 - ? - level with a significant number of lasers, have to get the key and get through a gate
-14 - the lava gauntlet -
-etc
