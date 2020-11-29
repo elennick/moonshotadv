@@ -1827,6 +1827,267 @@
         }
     },
     {
+        "name": "Moon Maze",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 200,
+                    "y": 600
+                }
+            },
+            "planets": [
+                {
+                    "type": "broken",
+                    "size": 2,
+                    "position": {
+                        "x": 245,
+                        "y": 520
+                    }
+                },
+                {
+                    "type": "mech",
+                    "size": 2,
+                    "position": {
+                        "x": 245,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "earth",
+                    "size": 2,
+                    "position": {
+                        "x": 245,
+                        "y": 200
+                    }
+                },
+                {
+                    "type": "water",
+                    "size": 2,
+                    "position": {
+                        "x": 515,
+                        "y": 520
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 2,
+                    "position": {
+                        "x": 515,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 2,
+                    "position": {
+                        "x": 515,
+                        "y": 200
+                    }
+                },
+                {
+                    "type": "broken",
+                    "size": 2,
+                    "position": {
+                        "x": 785,
+                        "y": 520
+                    }
+                },
+                {
+                    "type": "mech",
+                    "size": 2,
+                    "position": {
+                        "x": 785,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "earth",
+                    "size": 2,
+                    "position": {
+                        "x": 785,
+                        "y": 200
+                    }
+                },
+                {
+                    "type": "lava",
+                    "size": 2,
+                    "position": {
+                        "x": 1045,
+                        "y": 520
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 2,
+                    "position": {
+                        "x": 1045,
+                        "y": 360
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 2,
+                    "position": {
+                        "x": 1045,
+                        "y": 200
+                    }
+                }
+            ],
+            "walls": [
+                {
+                    "position": {
+                        "x": 100,
+                        "y": 100
+                    },
+                    "size": {
+                        "w": 20,
+                        "h": 520
+                    }
+                },
+                {
+                    "position": {
+                        "x": 100,
+                        "y": 80
+                    },
+                    "size": {
+                        "w": 1080,
+                        "h": 20
+                    }
+                },
+                {
+                    "position": {
+                        "x": 100,
+                        "y": 620
+                    },
+                    "size": {
+                        "w": 1080,
+                        "h": 20
+                    }
+                },
+                {
+                    "position": {
+                        "x": 1160,
+                        "y": 100
+                    },
+                    "size": {
+                        "w": 20,
+                        "h": 520
+                    }
+                },
+                {
+                    "position": {
+                        "x": 370,
+                        "y": 270
+                    },
+                    "size": {
+                        "w": 20,
+                        "h": 350
+                    }
+                },
+                {
+                    "position": {
+                        "x": 640,
+                        "y": 370
+                    },
+                    "size": {
+                        "w": 20,
+                        "h": 250
+                    }
+                },
+                {
+                    "position": {
+                        "x": 640,
+                        "y": 270
+                    },
+                    "size": {
+                        "w": 270,
+                        "h": 20
+                    }
+                },
+                {
+                    "position": {
+                        "x": 910,
+                        "y": 100
+                    },
+                    "size": {
+                        "w": 20,
+                        "h": 350
+                    }
+                }
+            ],
+            "laserGates": [
+                {
+                    "position": {
+                        "x": 912,
+                        "y": 434
+                    },
+                    "direction": "vertical",
+                    "length": 186,
+                    "switchRate": 2
+                },
+                {
+                    "position": {
+                        "x": 640,
+                        "y": 84
+                    },
+                    "direction": "vertical",
+                    "length": 186,
+                    "switchRate": 2
+                },
+                {
+                    "position": {
+                        "x": 372,
+                        "y": 84
+                    },
+                    "direction": "vertical",
+                    "length": 186,
+                    "switchRate": 2
+                }
+            ],
+            "keys": [
+                {
+                    "position": {
+                        "x": 850,
+                        "y": 150
+                    }
+                }
+            ],
+            "lockedGates": [
+                {
+                    "position": {
+                        "x": 656,
+                        "y": 290
+                    },
+                    "direction": "vertical"
+                }
+            ],
+            "turrets": [
+                {
+                    "type": "bullet",
+                    "firingSpeed": 5,
+                    "projectileSpeed": 5,
+                    "startAngle": 1.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 515,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 5,
+                    "projectileSpeed": 5,
+                    "startAngle": 4.10,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 1045,
+                        "y": 125
+                    }
+                }
+            ]
+        }
+    },
+    {
         "name": "The Ice Gauntlet",
         "entities": {
             "player": {

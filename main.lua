@@ -20,7 +20,7 @@ local bulletLifetime = 10 --how long a bullet lives before being destroyed (if i
 local missileLifetime = 20
 local paused = false
 
-local debug = false --make sure this is false for real deployment
+local debug = true --make sure this is false for real deployment
 local music = true --make sure this is true for real deployment
 
 local currentLevelName = nil
@@ -140,6 +140,10 @@ function love.keypressed(key, scancode, isrepeat)
         love.audio.setVolume(0)
     end
 
+    if key == "n" and paused and debug then
+        loadNextLevel()
+    end
+
     if key == "l" and paused and debug then
         if pcall(function()
             local textFromClipoboard = tostring(love.system.getClipboardText())
@@ -184,7 +188,6 @@ function love.update(dt)
 
     local vectorTowardsClosestPlanet = cpml.vec2(vectorXTowardClosestPlanet, vectorYTowardClosestPlanet)
     local normalizedVectorTowardsClosestPlanet = cpml.vec2.normalize(vectorTowardsClosestPlanet)
-    print('vector - ' .. normalizedVectorTowardsClosestPlanet.x .. ',' .. normalizedVectorTowardsClosestPlanet.y)
 
     --apply gravity towards the closest planet
     if not player:getBox():enter('Planet') then
@@ -194,8 +197,7 @@ function love.update(dt)
         player:getBox():setAngularVelocity(0)
         if closestPlanet:getType() == 'moon' and not isLastLevel() then
             successSound:clone():play()
-            currentLevel = currentLevel + 1
-            loadLevel(currentLevel)
+            loadNextLevel()
             return
         end
     end
@@ -475,4 +477,9 @@ end
 
 function isLastLevel()
     return table.getn(levels) == currentLevel
+end
+
+function loadNextLevel()
+    currentLevel = currentLevel + 1
+    loadLevel(currentLevel)
 end

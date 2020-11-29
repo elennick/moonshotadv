@@ -22,6 +22,7 @@ SMA uses several libraries available for Love2D/Lua including:
 * Windfield - https://github.com/a327ex/windfield (physics)
 * json.lua - https://github.com/rxi/json.lua (json serialization)
 * love-release - https://github.com/MisterDA/love-release (generate executables)
+* CPML - https://github.com/excessive/cpml (game math)
 
 ## Debug
 There are debug commands available if you build with the `debug` option enabled. Currently it can only be enabled by setting the value to true in the code itself here: https://github.com/elennick/moonshotadv/blob/main/main.lua#L22
@@ -29,6 +30,7 @@ There are debug commands available if you build with the `debug` option enabled.
 While this option is enabled, you can press ESCAPE to bring up the pause menu and press the following keys to toggle debug actions:
 * V - sets the volume to 0
 * R - restarts the current level
+* N - skips to the next level
 * Q - calls `love.event.quit()` and stops the game
 * L - tries to load levels JSON from the system clipboard
 
