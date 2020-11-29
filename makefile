@@ -10,6 +10,7 @@ web-clean:
 
 web-build: web-clean
 		love-js ~/Development/moonshotadv ~/Development/moonshotadv/build -t 'Super Moonshot Adventure' -m 200000000
+		cp ~/Development/moonshotadv/web/index.html ~/Development/moonshotadv/build/
 
 web-zip: web-clean web-build
 		zip -r build/moonshotadventure.zip build

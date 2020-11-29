@@ -2058,7 +2058,7 @@
             "laserGates": [
                 {
                     "position": {
-                        "x": 950,
+                        "x": 960,
                         "y": 200
                     },
                     "direction": "vertical",

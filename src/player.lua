@@ -12,11 +12,11 @@ function Player:initialize(x, y)
     self.rotation = 0
     self.keysInInventory = 0
 
-    playerIdleSpriteSheet = love.graphics.newImage("image/characters/elise_idle.png")
+    playerIdleSpriteSheet = love.graphics.newImage("image/elise_idle.png")
     playerIdleFrames = anim8.newGrid(32, 32, playerIdleSpriteSheet:getWidth(), playerIdleSpriteSheet:getHeight())
     playerIdleAnimation = anim8.newAnimation(playerIdleFrames('1-3', 1), 0.2)
 
-    playerWalkSpriteSheet = love.graphics.newImage("image/characters/elise_walk.png")
+    playerWalkSpriteSheet = love.graphics.newImage("image/elise_walk.png")
     playerWalkFrames = anim8.newGrid(32, 32, playerWalkSpriteSheet:getWidth(), playerWalkSpriteSheet:getHeight())
     playerWalkAnimation = anim8.newAnimation(playerWalkFrames('1-3', 1), 0.15)
 
