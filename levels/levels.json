@@ -1827,6 +1827,248 @@
         }
     },
     {
+        "name": "The Ice Gauntlet",
+        "entities": {
+            "player": {
+                "startPosition": {
+                    "x": 25,
+                    "y": 350
+                }
+            },
+            "planets": [
+                {
+                    "type": "ice",
+                    "size": 3,
+                    "position": {
+                        "x": 175,
+                        "y": 350
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 3,
+                    "position": {
+                        "x": 400,
+                        "y": 350
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 3,
+                    "position": {
+                        "x": 625,
+                        "y": 350
+                    }
+                },
+                {
+                    "type": "ice",
+                    "size": 3,
+                    "position": {
+                        "x": 850,
+                        "y": 350
+                    }
+                },
+                {
+                    "type": "moon",
+                    "size": 4,
+                    "position": {
+                        "x": 1100,
+                        "y": 350
+                    }
+                }
+            ],
+            "turrets": [
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2,
+                    "projectileSpeed": 8,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 250,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 350,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2,
+                    "projectileSpeed": 8,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 450,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 550,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2,
+                    "projectileSpeed": 10,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 650,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 750,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2.5,
+                    "projectileSpeed": 12,
+                    "startAngle": 3.12,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 850,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 300,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 8,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 400,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 500,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 4,
+                    "projectileSpeed": 6,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 600,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 2,
+                    "projectileSpeed": 10,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 700,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 800,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "bullet",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 6,
+                    "startAngle": 0.0,
+                    "tracksPlayer": false,
+                    "position": {
+                        "x": 900,
+                        "y": 600
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 20,
+                    "startAngle": 0.0,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 1100,
+                        "y": 100
+                    }
+                },
+                {
+                    "type": "missile",
+                    "firingSpeed": 3,
+                    "projectileSpeed": 20,
+                    "startAngle": 0.0,
+                    "tracksPlayer": true,
+                    "position": {
+                        "x": 1100,
+                        "y": 600
+                    }
+                }
+            ],
+            "laserGates": [
+                {
+                    "position": {
+                        "x": 950,
+                        "y": 200
+                    },
+                    "direction": "vertical",
+                    "length": 300,
+                    "switchRate": 1.5
+                }
+            ]
+        }
+    },
+    {
         "name": "You Win!",
         "entities": {
             "player": {
