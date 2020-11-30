@@ -18,9 +18,9 @@ local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 local missileLifetime = 20
-local gravityMultiplier = 1250
-local jumpMultiplier = 6
-local walkMultiplier = 100
+local gravityMultiplier = 30
+local jumpMultiplier = 7
+local walkMultiplier = 1.8
 
 local paused = false
 local debug = false --make sure this is false for real deployment
@@ -197,8 +197,8 @@ function love.update(dt)
     --apply gravity towards the closest planet
     if not player:getBox():enter('Planet') then
         player:getBox():applyForce(
-                normalizedVectorTowardsClosestPlanet.x * gravityMultiplier * dt,
-                normalizedVectorTowardsClosestPlanet.y * gravityMultiplier * dt)
+                normalizedVectorTowardsClosestPlanet.x * gravityMultiplier,
+                normalizedVectorTowardsClosestPlanet.y * gravityMultiplier)
     else
         if lastJumped > .1 and lastPlanetTouched ~= closestPlanet then
             player:getBox():setLinearVelocity(0, 0)
@@ -227,8 +227,8 @@ function love.update(dt)
         --clockwise
         isMovingRight = true
         player:getBox():setLinearVelocity(
-                normalizedVectorTowardsClosestPlanet.y * dt * walkMultiplier,
-                -normalizedVectorTowardsClosestPlanet.x * dt * walkMultiplier)
+                normalizedVectorTowardsClosestPlanet.y * walkMultiplier,
+                -normalizedVectorTowardsClosestPlanet.x * walkMultiplier)
     end
     if love.keyboard.isDown("left") and lastJumped > jumpLimit and jumpState == 'landed' then
         --counterclockwise
@@ -236,8 +236,8 @@ function love.update(dt)
         --local velx, vely = player:getBox():getLinearVelocity()
         --player:getBox():setLinearVelocity(math.min(velx, 80), math.min(vely, 80))
         player:getBox():setLinearVelocity(
-                -normalizedVectorTowardsClosestPlanet.y * dt * walkMultiplier,
-                normalizedVectorTowardsClosestPlanet.x * dt * walkMultiplier)
+                -normalizedVectorTowardsClosestPlanet.y * walkMultiplier,
+                normalizedVectorTowardsClosestPlanet.x * walkMultiplier)
     end
 
     --update all entities in the world
