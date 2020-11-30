@@ -52,3 +52,5 @@ This project has several targets to help run and build from the command line in 
 ![PIC 3](https://github.com/elennick/moonshotadv/blob/main/pics/screenshot2.png)
 ![PIC 4](https://github.com/elennick/moonshotadv/blob/main/pics/screenshot3.png)
 ![PIC 5](https://github.com/elennick/moonshotadv/blob/main/pics/screenshot4.png)
+![PIC 6](https://github.com/elennick/moonshotadv/blob/main/pics/screenshot5.png)
+![PIC 7](https://github.com/elennick/moonshotadv/blob/main/pics/screenshot6.png)
