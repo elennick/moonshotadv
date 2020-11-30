@@ -36,8 +36,7 @@ function RotatingPlanet:initialize(args)
 
     self.collider = world:newCircleCollider(self.x, self.y, self.size * 24)
     self.collider:setType('static')
-    self.collider:setFriction(1)
-    --self.collider:setAngularDampening(3)
+    self.collider:setFriction(10)
     self.collider:setRestitution(0.0)
     self.collider:setCollisionClass('Planet')
 end

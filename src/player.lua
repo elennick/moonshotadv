@@ -20,8 +20,11 @@ function Player:initialize(x, y)
     playerWalkFrames = anim8.newGrid(32, 32, playerWalkSpriteSheet:getWidth(), playerWalkSpriteSheet:getHeight())
     playerWalkAnimation = anim8.newAnimation(playerWalkFrames('1-3', 1), 0.15)
 
-    self.collider = world:newRectangleCollider(x, y, 32, 32)
+    self.collider = world:newBSGRectangleCollider(x, y, 32, 32, 8)
     self.collider:setCollisionClass('Player')
+    self.collider:setFriction(10)
+    self.collider:setAngularDamping(30000)
+    self.collider:setRestitution(0.0)
 end
 
 function Player:draw()
