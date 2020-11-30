@@ -3,7 +3,7 @@ function love.conf(t)
     t.window.height = 720
     t.version = "11.3"
     t.window.resizable = false
-    t.window.vsync = false
+    t.window.vsync = true
     t.window.fullscreen = false
     t.window.msaa = 1
     t.window.title = "Super Moonshot Adventure"

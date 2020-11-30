@@ -18,12 +18,12 @@ local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 local missileLifetime = 20
-local gravityMultiplier = 25
+local gravityMultiplier = 1250
 local jumpMultiplier = 6
-local walkMultiplier = 600
+local walkMultiplier = 100
 
 local paused = false
-local debug = true --make sure this is false for real deployment
+local debug = false --make sure this is false for real deployment
 local music = true --make sure this is true for real deployment
 
 local currentLevelName = nil
@@ -33,6 +33,7 @@ local planets = {}
 local levelStartTime = nil
 local timeSinceLevelStart = 0
 local lastPlanetTouched = nil
+local jumpState = 'jumped'
 entities = {}
 bullets = {}
 missiles = {}
@@ -171,6 +172,8 @@ function love.keypressed(key, scancode, isrepeat)
 
         jumpSound:clone():play()
         lastJumped = 0
+        jumpState = 'jumped'
+        print('jumpstate ' .. jumpState)
     end
 
     if key == "escape" then
@@ -179,6 +182,7 @@ function love.keypressed(key, scancode, isrepeat)
 end
 
 function love.update(dt)
+    --print('dt - ' .. dt)
     timeSinceLevelStart = love.timer.getTime() - levelStartTime
     lastJumped = lastJumped + dt
 
@@ -192,7 +196,7 @@ function love.update(dt)
 
     --apply gravity towards the closest planet
     if not player:getBox():enter('Planet') then
-        player:applyLinearImpulse(
+        player:getBox():applyForce(
                 normalizedVectorTowardsClosestPlanet.x * gravityMultiplier * dt,
                 normalizedVectorTowardsClosestPlanet.y * gravityMultiplier * dt)
     else
@@ -207,6 +211,8 @@ function love.update(dt)
             return
         end
         lastPlanetTouched = closestPlanet
+        jumpState = 'landed'
+        print('jumpstate ' .. jumpState)
     end
 
     if player:getBox():enter('Bullet') or player:getBox():enter('Missile') then
@@ -217,14 +223,14 @@ function love.update(dt)
     --handle left/right input
     isMovingLeft = false
     isMovingRight = false
-    if love.keyboard.isDown("right") and lastJumped > jumpLimit then
+    if love.keyboard.isDown("right") and lastJumped > jumpLimit and jumpState == 'landed' then
         --clockwise
         isMovingRight = true
         player:getBox():setLinearVelocity(
                 normalizedVectorTowardsClosestPlanet.y * dt * walkMultiplier,
                 -normalizedVectorTowardsClosestPlanet.x * dt * walkMultiplier)
     end
-    if love.keyboard.isDown("left") and lastJumped > jumpLimit then
+    if love.keyboard.isDown("left") and lastJumped > jumpLimit and jumpState == 'landed' then
         --counterclockwise
         isMovingLeft = true
         --local velx, vely = player:getBox():getLinearVelocity()
