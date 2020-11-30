@@ -18,8 +18,11 @@ local lastJumped = 0
 local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 local missileLifetime = 20
-local paused = false
+local gravityMultiplier = 25
+local jumpMultiplier = 6
+local walkMultiplier = 600
 
+local paused = false
 local debug = true --make sure this is false for real deployment
 local music = true --make sure this is true for real deployment
 
@@ -29,6 +32,7 @@ local levels = nil
 local planets = {}
 local levelStartTime = nil
 local timeSinceLevelStart = 0
+local lastPlanetTouched = nil
 entities = {}
 bullets = {}
 missiles = {}
@@ -158,6 +162,17 @@ function love.keypressed(key, scancode, isrepeat)
         end
     end
 
+    if (key == "up" or key == "space") and lastJumped > jumpLimit and timeSinceLevelStart > .2 then
+        local closestPlanet = getClosestPlanet()
+        local normalizedVectorTowardsClosestPlanet = getNormalizedVectorTowardsPlanet(closestPlanet)
+        player:getBox():setLinearVelocity(
+                -normalizedVectorTowardsClosestPlanet.x * jumpMultiplier,
+                -normalizedVectorTowardsClosestPlanet.y * jumpMultiplier)
+
+        jumpSound:clone():play()
+        lastJumped = 0
+    end
+
     if key == "escape" then
         paused = not paused
     end
@@ -165,41 +180,33 @@ end
 
 function love.update(dt)
     timeSinceLevelStart = love.timer.getTime() - levelStartTime
+    lastJumped = lastJumped + dt
 
     --if game is paused then don't update anything's state
     if paused then
         return
     end
 
-    --figure out what the closest planet is
-    if table.getn(planets) > 0 then
-        closestPlanet = planets[1]
-        for i in ipairs(planets) do
-            local distanceBetweenPlayerAndCurrentClosest = distanceBetweenEntities(player, closestPlanet)
-            local distanceBetweenPlayerAndThisPlanet = distanceBetweenEntities(player, planets[i])
-            if distanceBetweenPlayerAndCurrentClosest > distanceBetweenPlayerAndThisPlanet then
-                closestPlanet = planets[i]
-            end
-        end
-    end
-
-    vectorXTowardClosestPlanet = closestPlanet:getX() - player:getX();
-    vectorYTowardClosestPlanet = closestPlanet:getY() - player:getY();
-
-    local vectorTowardsClosestPlanet = cpml.vec2(vectorXTowardClosestPlanet, vectorYTowardClosestPlanet)
-    local normalizedVectorTowardsClosestPlanet = cpml.vec2.normalize(vectorTowardsClosestPlanet)
+    local closestPlanet = getClosestPlanet()
+    local normalizedVectorTowardsClosestPlanet = getNormalizedVectorTowardsPlanet(closestPlanet)
 
     --apply gravity towards the closest planet
     if not player:getBox():enter('Planet') then
-        player:applyLinearImpulse(normalizedVectorTowardsClosestPlanet.x * 100, normalizedVectorTowardsClosestPlanet.y * 100)
+        player:applyLinearImpulse(
+                normalizedVectorTowardsClosestPlanet.x * gravityMultiplier * dt,
+                normalizedVectorTowardsClosestPlanet.y * gravityMultiplier * dt)
     else
-        player:getBox():setLinearVelocity(0, 0)
-        player:getBox():setAngularVelocity(0)
+        if lastJumped > .1 and lastPlanetTouched ~= closestPlanet then
+            player:getBox():setLinearVelocity(0, 0)
+            player:getBox():setAngularVelocity(0)
+            print('stopped landed')
+        end
         if closestPlanet:getType() == 'moon' and not isLastLevel() then
             successSound:clone():play()
             loadNextLevel()
             return
         end
+        lastPlanetTouched = closestPlanet
     end
 
     if player:getBox():enter('Bullet') or player:getBox():enter('Missile') then
@@ -207,26 +214,24 @@ function love.update(dt)
         restartLevel()
     end
 
-    --handle input
-    lastJumped = lastJumped + dt
-    if (love.keyboard.isDown("up") or love.keyboard.isDown("space")) and lastJumped > jumpLimit and timeSinceLevelStart > .2 then
-        --TODO make jump distance independent of planet size
-        jumpSound:clone():play()
-        player:getBox():setLinearVelocity(-normalizedVectorTowardsClosestPlanet.x * 700, -normalizedVectorTowardsClosestPlanet.y * 700)
-        lastJumped = 0
-    end
-
+    --handle left/right input
     isMovingLeft = false
     isMovingRight = false
     if love.keyboard.isDown("right") and lastJumped > jumpLimit then
         --clockwise
         isMovingRight = true
-        player:getBox():applyLinearImpulse(vectorYTowardClosestPlanet / 2, -vectorXTowardClosestPlanet / 2)
+        player:getBox():setLinearVelocity(
+                normalizedVectorTowardsClosestPlanet.y * dt * walkMultiplier,
+                -normalizedVectorTowardsClosestPlanet.x * dt * walkMultiplier)
     end
     if love.keyboard.isDown("left") and lastJumped > jumpLimit then
         --counterclockwise
         isMovingLeft = true
-        player:getBox():applyLinearImpulse(-vectorYTowardClosestPlanet / 2, vectorXTowardClosestPlanet / 2)
+        --local velx, vely = player:getBox():getLinearVelocity()
+        --player:getBox():setLinearVelocity(math.min(velx, 80), math.min(vely, 80))
+        player:getBox():setLinearVelocity(
+                -normalizedVectorTowardsClosestPlanet.y * dt * walkMultiplier,
+                normalizedVectorTowardsClosestPlanet.x * dt * walkMultiplier)
     end
 
     --update all entities in the world
@@ -280,7 +285,7 @@ function love.update(dt)
     end
 
     --angle the player feet-down towards the closest planet
-    local angleTo = math.atan2(vectorYTowardClosestPlanet, vectorXTowardClosestPlanet)
+    local angleTo = math.atan2(normalizedVectorTowardsClosestPlanet.y, normalizedVectorTowardsClosestPlanet.x)
     player:update(dt, angleTo)
 end
 
@@ -482,4 +487,37 @@ end
 function loadNextLevel()
     currentLevel = currentLevel + 1
     loadLevel(currentLevel)
+end
+
+function getClosestPlanet()
+    local closestPlanet = nil
+
+    if table.getn(planets) > 0 then
+        closestPlanet = planets[1]
+        for i in ipairs(planets) do
+            local distanceBetweenPlayerAndCurrentClosest = distanceBetweenEntities(player, closestPlanet)
+            local distanceBetweenPlayerAndThisPlanet = distanceBetweenEntities(player, planets[i])
+            if distanceBetweenPlayerAndCurrentClosest > distanceBetweenPlayerAndThisPlanet then
+                closestPlanet = planets[i]
+            end
+        end
+    end
+
+    return closestPlanet
+end
+
+function getNormalizedVectorTowardsPlanet(planet)
+    local vectorXTowardPlanet = planet:getX() - player:getX();
+    local vectorYTowardPlanet = planet:getY() - player:getY();
+    return cpml.vec2(vectorXTowardPlanet, vectorYTowardPlanet)
+end
+
+function clampVector(v, d)
+    local x, y = v.x, v.y
+    local d2 = math.sqrt(x * x + y * y)
+    if d2 > d then
+        v.x = x / d2 * d
+        v.y = y / d2 * d
+    end
+    return d2
 end

@@ -4,7 +4,6 @@ last todo
 * improve missile physics
 * add more levels
 * fix timer so it pauses when the pause screen is up
-* make sound stop when levels change
+* make playing sound effects stop when levels change
 * see if size of web version can be reduced
-* figure out why chrome in win10 physics dont work
-
+* figure out why chrome in win10 physics on my computer are weird
