@@ -23,7 +23,7 @@ local jumpMultiplier = 500
 local walkMultiplier = 180
 
 local paused = false
-local debug = true --make sure this is false for real deployment
+local debug = false --make sure this is false for real deployment
 local music = true --make sure this is true for real deployment
 
 local currentLevelName = nil
