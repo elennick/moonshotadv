@@ -19,11 +19,11 @@ local jumpLimit = 0.5 --how often can the player jump... lower numbers are faste
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 local missileLifetime = 20
 local gravityMultiplier = 30
-local jumpMultiplier = 7
+local jumpMultiplier = 6
 local walkMultiplier = 1.8
 
 local paused = false
-local debug = false --make sure this is false for real deployment
+local debug = true --make sure this is false for real deployment
 local music = true --make sure this is true for real deployment
 
 local currentLevelName = nil
@@ -173,7 +173,6 @@ function love.keypressed(key, scancode, isrepeat)
         jumpSound:clone():play()
         lastJumped = 0
         jumpState = 'jumped'
-        print('jumpstate ' .. jumpState)
     end
 
     if key == "escape" then
@@ -182,7 +181,6 @@ function love.keypressed(key, scancode, isrepeat)
 end
 
 function love.update(dt)
-    --print('dt - ' .. dt)
     timeSinceLevelStart = love.timer.getTime() - levelStartTime
     lastJumped = lastJumped + dt
 
@@ -203,7 +201,6 @@ function love.update(dt)
         if lastJumped > .1 and lastPlanetTouched ~= closestPlanet then
             player:getBox():setLinearVelocity(0, 0)
             player:getBox():setAngularVelocity(0)
-            print('stopped landed')
         end
         if closestPlanet:getType() == 'moon' and not isLastLevel() then
             successSound:clone():play()
@@ -212,7 +209,6 @@ function love.update(dt)
         end
         lastPlanetTouched = closestPlanet
         jumpState = 'landed'
-        print('jumpstate ' .. jumpState)
     end
 
     if player:getBox():enter('Bullet') or player:getBox():enter('Missile') then
