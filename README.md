@@ -3,7 +3,7 @@
 ![PIC 1](https://github.com/elennick/moonshotadv/blob/main/pics/title-black-bgrd.png)
 
 ## General
-This game is my submission to the Github Gameoff 2020 gamejam: https://itch.io/jam/game-off-2020
+This game is my submission to the Github Gameoff 2020 gamejam: https://itch.io/jam/game-off-2020/rate/832614
 
 Itch game page: https://elennick.itch.io/httpselennickitchiosuper-moonshot-adventure
 
