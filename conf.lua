@@ -22,7 +22,7 @@ function love.conf(t)
         description = nil, -- The project description (string)
         homepage = 'https://elennick.itch.io/httpselennickitchiosuper-moonshot-adventure', -- The project homepage (string)
         identifier = 'com.evanlennick.sma', -- The project Uniform Type Identifier (string)
-        excludeFileList = {}, -- File patterns to exclude. (string list)
+        excludeFileList = { 'menu.wav', 'pics/', 'releases/', '*.zip', '*.love', 'test.json', '.idea/' }, -- File patterns to exclude. (string list)
         releaseDirectory = 'releases', -- Where to store the project releases (string)
     }
 end
