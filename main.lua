@@ -18,7 +18,7 @@ local lastJumped = 0
 local jumpLimit = 0.8 --how often can the player jump... lower numbers are faster
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 local missileLifetime = 20
-local gravityMultiplier = 2500
+local gravityMultiplier = 2800
 local jumpMultiplier = 500
 local walkMultiplier = 180
 
