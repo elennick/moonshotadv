@@ -15,12 +15,12 @@ require 'src.key'
 require 'src.lockedgate'
 
 local lastJumped = 0
-local jumpLimit = 0.5 --how often can the player jump... lower numbers are faster
+local jumpLimit = 0.8 --how often can the player jump... lower numbers are faster
 local bulletLifetime = 10 --how long a bullet lives before being destroyed (if it doesnt collide with something first)
 local missileLifetime = 20
-local gravityMultiplier = 30
-local jumpMultiplier = 6
-local walkMultiplier = 1.8
+local gravityMultiplier = 2500
+local jumpMultiplier = 500
+local walkMultiplier = 180
 
 local paused = false
 local debug = true --make sure this is false for real deployment
@@ -192,7 +192,7 @@ function love.update(dt)
     local closestPlanet = getClosestPlanet()
     local normalizedVectorTowardsClosestPlanet = getNormalizedVectorTowardsPlanet(closestPlanet)
 
-    --apply gravity towards the closest planet
+    --apply gravity towards the closest planet or handle landing on a planet
     if not player:getBox():enter('Planet') then
         player:getBox():applyForce(
                 normalizedVectorTowardsClosestPlanet.x * gravityMultiplier,
@@ -211,6 +211,7 @@ function love.update(dt)
         jumpState = 'landed'
     end
 
+    --handle missiles or bullets hitting the player
     if player:getBox():enter('Bullet') or player:getBox():enter('Missile') then
         deathSound:clone():play()
         restartLevel()
@@ -229,8 +230,6 @@ function love.update(dt)
     if love.keyboard.isDown("left") and lastJumped > jumpLimit and jumpState == 'landed' then
         --counterclockwise
         isMovingLeft = true
-        --local velx, vely = player:getBox():getLinearVelocity()
-        --player:getBox():setLinearVelocity(math.min(velx, 80), math.min(vely, 80))
         player:getBox():setLinearVelocity(
                 -normalizedVectorTowardsClosestPlanet.y * walkMultiplier,
                 normalizedVectorTowardsClosestPlanet.x * walkMultiplier)
@@ -511,7 +510,7 @@ end
 function getNormalizedVectorTowardsPlanet(planet)
     local vectorXTowardPlanet = planet:getX() - player:getX();
     local vectorYTowardPlanet = planet:getY() - player:getY();
-    return cpml.vec2(vectorXTowardPlanet, vectorYTowardPlanet)
+    return cpml.vec2(vectorXTowardPlanet, vectorYTowardPlanet):normalize()
 end
 
 function clampVector(v, d)
