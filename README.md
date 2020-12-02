@@ -9,10 +9,10 @@ Itch game page: https://elennick.itch.io/httpselennickitchiosuper-moonshot-adven
 
 Super Moonshot Adventure was created using:
 * LOVE2D 11.3 - https://love2d.org
-* Assets from Itch.io - https://itch.io/game-assets/free
+* Various art assets from Itch.io - https://itch.io/game-assets/free
 * Sound effects from Freesound.org - https://freesound.org
-
-Title art was created by Kristian Correa.
+* Music by David Harris - https://david-harris.itch.io/ost-many-stars
+* Title art by Kristian Correa.
 
 ## Libraries
 SMA uses several libraries available for Love2D/Lua including:
