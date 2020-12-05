@@ -47,6 +47,7 @@ function love.load()
     local major, minor, revision, codename = love.getVersion()
     print("running with LÖVE version: " .. major .. "." .. minor .. "." .. revision .. " " .. codename)
 
+    love.graphics.setDefaultFilter('nearest', 'nearest', 8)
     levels = json.decode(readFile("./levels/levels.json"))
 
     world = wf.newWorld(0, 0, true)
@@ -62,7 +63,7 @@ function love.load()
     world:addCollisionClass('Meteor', { ignores = { 'All' } })
     world:addCollisionClass('Key', { ignores = { 'Bullet', 'Missile' } })
 
-    mainFont = love.graphics.newFont("image/font/Amuro.otf", 12)
+    mainFont = love.graphics.newFont("image/font/Amuro.otf", 12, 'mono')
     love.graphics.setFont(mainFont)
 
     titleImage = love.graphics.newImage("image/title.png")
