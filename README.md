@@ -7,6 +7,8 @@ This game is my submission to the Github Gameoff 2020 gamejam: https://itch.io/j
 
 Itch game page: https://elennick.itch.io/httpselennickitchiosuper-moonshot-adventure
 
+YouTube playthrough by Bastion Top: https://www.youtube.com/watch?v=UcqN7U5xUXw&t=2990s
+
 Super Moonshot Adventure was created using:
 * LOVE2D 11.3 - https://love2d.org
 * Various art assets from Itch.io - https://itch.io/game-assets/free
